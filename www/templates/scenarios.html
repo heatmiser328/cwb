@@ -1,0 +1,13 @@
+<ion-view title="{{battle.title}} - Scenarios" class="bubble-background">
+  <ion-content>
+    <ion-list class="responsive-sm">
+      <ion-item ng-repeat="scenario in battle.scenarios" href="#/app/scenario/{{scenario.id}}">
+	  	<div class="row">
+		  	<div class="col col-50">{{scenario.title}}</div>
+		  	<div class="col"><small>{{scenario.startDateTime | date:'MMM d, y h:mm a'}}</small></div>
+		  	<div class="col"><small>{{scenario.endDateTime | date:'MMM d, y h:mm a'}}</small></div>
+		</div>
+      </ion-item>
+    </ion-list>
+  </ion-content>
+</ion-view>
