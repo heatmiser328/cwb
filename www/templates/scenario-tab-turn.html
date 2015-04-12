@@ -1,5 +1,14 @@
-<ion-view view-title="{{scenario.title}} Turn">
-  <ion-content class="padding">
-  	<h1>This is the turn control</h1>
-  </ion-content>
+<ion-view view-title="{{scenario.title}}" class="bubble-background">
+		<div class="responsive-sm">
+			<div class="row">
+				<div class="col"><button class="button button-positive ion-chevron-left" ng-click="turnPrev()"></button></div>
+				<div class="col"><input type="text" readonly="readonly" ng-model="current.turn" /></div>
+				<div class="col"><button class="button button-positive ion-chevron-right" ng-click="turnNext()"></button></div>
+			</div>
+			<div class="row">
+				<div class="col"><button class="button button-positive ion-chevron-left" ng-click="phasePrev()"></button></div>
+				<div class="col"><input type="text" readonly="readonly" ng-model="current.phase" /></div>
+				<div class="col"><button class="button button-positive ion-chevron-right" ng-click="phaseNext()"></button></div>
+			</div>
+		</div>
 </ion-view>

@@ -1,31 +1,32 @@
 <ion-view title="{{scenario.title}}" class="bubble-background">
-	<ion-content>
-		<ion-tabs class="tabs-icon-top tabs-color-active-positive">
-
-		  <ion-tab title="Turn" icon-off="ion-ios-pulse" icon-on="ion-ios-pulse-strong" href="#/turn">
-		    <ion-nav-view name="scenario-tab-turn@app"></ion-nav-view>
-		  </ion-tab>
-
-		  <ion-tab title="Orders" icon-off="ion-ios-chatboxes-outline" icon-on="ion-ios-gear" href="#/orders">
-		    <ion-nav-view name="scenario-tab-orders"></ion-nav-view>
-		  </ion-tab>
-
-		  <ion-tab title="Roster" icon-off="ion-ios-gear-outline" icon-on="ion-ios-gear" href="#/roster">
-		    <ion-nav-view name="scenario-tab-roster"></ion-nav-view>
-		  </ion-tab>
-
-		  <ion-tab title="Fire" icon-off="ion-ios-gear-outline" icon-on="ion-ios-gear" href="#/fire">
-		    <ion-nav-view name="scenario-tab-fire"></ion-nav-view>
-		  </ion-tab>
-
-		  <ion-tab title="Melee" icon-off="ion-ios-gear-outline" icon-on="ion-ios-gear" href="#/melee">
-		    <ion-nav-view name="scenario-tab-melee"></ion-nav-view>
-		  </ion-tab>
-		  
-		  <ion-tab title="Morale" icon-off="ion-ios-gear-outline" icon-on="ion-ios-gear" href="#/morale">
-		    <ion-nav-view name="scenario-tab-morale"></ion-nav-view>
-		  </ion-tab>
-		  
-		</ion-tabs>
+	<ion-content has-header="true" has-footer="true" padding="false">
+		<div class="item tabs tabs-icon-top">
+			<a class="tab-item" href="#/app/scenario/{{scenario.id}}/turn">
+				<i class="icon ion-clock"></i>
+				Turn
+			</a>
+			<a class="tab-item" href="#/app/scenario/{{scenario.id}}/orders">
+				<i class="icon ion-clipboard"></i>
+				Orders
+			</a>
+			<a class="tab-item" href="#/app/scenario/{{scenario.id}}/roster">
+				<i class="icon ion-person-stalker"></i>
+				Roster
+			</a>
+			<a class="tab-item" href="#/app/scenario/{{scenario.id}}/fire">
+				<i class="icon ion-bonfire"></i>
+				Fire
+			</a>
+			<a class="tab-item" href="#/app/scenario/{{scenario.id}}/melee">
+				<i class="icon ion-load-b"></i>
+				Melee
+			</a>
+			<a class="tab-item" href="#/app/scenario/{{scenario.id}}/morale">
+				<i class="icon ion-beer"></i>
+				Morale
+			</a>
+			
+		</div>
+		<ion-nav-view></ion-nav-view>
 	</ion-content>
 </ion-view>

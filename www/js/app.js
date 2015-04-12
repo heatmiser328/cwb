@@ -24,7 +24,6 @@ angular.module('cwb', ['ionic', 'cwb.controllers', 'cwb.services'])
             templateUrl: 'templates/menu.html',
             controller: 'AppCtrl'
         })
-
         .state('app.battles', {
             url: '/battles',
             views: {
@@ -34,7 +33,6 @@ angular.module('cwb', ['ionic', 'cwb.controllers', 'cwb.services'])
                 }
             }
         })
-        
         .state('app.scenarios', {
         	url: '/scenarios/:battleId',
             views: {
@@ -45,42 +43,26 @@ angular.module('cwb', ['ionic', 'cwb.controllers', 'cwb.services'])
             }
         })
         
-        /*
+        // setup an abstract state for the tabs directive
         .state('app.scenario', {
         	url: '/scenario/:scenarioId',
+            abstract: true,
             views: {
             	'menuContent': {
-                	templateUrl: 'templates/scenario.html',
-                    controller: 'ScenarioCtrl'
+            		templateUrl: 'templates/scenario.html',
+	                controller: 'ScenarioCtrl'
 				}
-            }
+            }                    
         })
-        */
-        
-        // setup an abstract state for the tabs directive
-        /*
-        .state('tabs', {
-        	url: '/scenario',
-            abstract: true,
-            templateUrl: 'templates/scenario.html'
-		})
-        */
-        .state('app.scenario', {
-        	url: '/scenario/:scenarioId',
-            abstract: true,
-            templateUrl: 'templates/scenario.html',
-            controller: 'ScenarioCtrl'
-        })
-        
-        // Each tab has its own nav history stack:
         .state('app.scenario.turn', {
         	url: '/turn',
-            views: {
-            	'scenario-tab-turn': {
-                	templateUrl: 'templates/scenario-tab-turn.html',
-                    controller: 'ScenarioTurnCtrl'
-				}
-			}
+            templateUrl: 'templates/scenario-tab-turn.html',
+            controller: 'ScenarioTurnCtrl'
+		})
+        .state('app.scenario.orders', {
+        	url: '/orders',
+            templateUrl: 'templates/scenario-tab-orders.html',
+            controller: 'ScenarioOrdersCtrl'
 		});
             
         // if none of the above states are matched, use this as the fallback

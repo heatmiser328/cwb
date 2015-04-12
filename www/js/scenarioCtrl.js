@@ -1,6 +1,6 @@
 angular.module('cwb.controllers')
 
-.controller('ScenarioCtrl', function($scope, $log, $stateParams, $state, Battles) {
+.controller('ScenarioCtrl', function($rootScope, $scope, $log, $stateParams, Battles) {
 	$log.info('load scenario controller');
     Battles.getScenario($stateParams.scenarioId)
 	.then(function(data) {
@@ -16,7 +16,7 @@ angular.module('cwb.controllers')
         $scope.current = {};
 	})
     .finally(function() {
-        //$state.go('app.scenario.turn');
+        $rootScope.$emit('scenarioReady');
     });
     
 });
