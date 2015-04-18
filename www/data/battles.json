@@ -1,6 +1,7 @@
 [{
 		"id" : 1,
 		"title" : "April's Harvest",
+  		"img": "aprilsharvest.jpg",
 		"armies" : [{
 				"id" : 1,
 				"name" : "ATenn",
@@ -913,6 +914,7 @@
 	}, {
 		"id" : 2,
 		"title" : "August Fury",
+  		"img": "augustfury.jpg",
 		"armies" : [{
 				"id" : 4,
 				"name" : "AVa",
@@ -2117,6 +2119,7 @@
 	}, {
 		"id" : 3,
 		"title" : "Champion Hill",
+  		"img": "championhill.jpg",
 		"armies" : [{
 				"id" : 7,
 				"name" : "ATenn",
@@ -3080,7 +3083,8 @@
 		]
 	}, {
 		"id" : 4,
-		"title" : "First Bull Run",
+		"title" : "Three Battles of Manassas",
+  		"img": "threebattlesofmanassas.jpg",
 		"armies" : [{
 				"id" : 10,
 				"name" : "ANEVa",
@@ -3743,6 +3747,7 @@
 	}, {
 		"id" : 5,
 		"title" : "In Their Quiet Fields",
+  		"img": "intheirquietfields.jpg",
 		"armies" : [{
 				"id" : 13,
 				"name" : "ANVa",
@@ -3791,6 +3796,7 @@
 	}, {
 		"id" : 6,
 		"title" : "No Better Place To Die",
+  		"img": "nobetterplacetodie.jpg",
 		"armies" : [{
 				"id" : 15,
 				"name" : "ACumb",
@@ -4169,6 +4175,7 @@
 	}, {
 		"id" : 7,
 		"title" : "The Seven Days",
+  		"img": "sevendays.jpg",
 		"armies" : [{
 				"id" : 17,
 				"name" : "APot",
@@ -5465,6 +5472,7 @@
 	}, {
 		"id" : 8,
 		"title" : "Seven Pines",
+  		"img": "sevenpines.jpg",
 		"armies" : [{
 				"id" : 19,
 				"name" : "APot",
@@ -6209,6 +6217,7 @@
 	}, {
 		"id" : 9,
 		"title" : "Strike Them A Blow",
+  		"img": "strikethemablow.jpg",
 		"armies" : [{
 				"id" : 21,
 				"name" : "APot",

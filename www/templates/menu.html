@@ -14,7 +14,7 @@
 
   <ion-side-menu side="left">
     <ion-header-bar class="bar-positive">
-	  <img class="title-image" src="img/cwb.png" />
+	  <img class="title-image" src="img/cwb.jpg" />
       <h1 class="title">CWB Assistant</h1>
     </ion-header-bar>
     <ion-content>
@@ -25,17 +25,27 @@
         <ion-item nav-clear menu-close ng-click="reset()">
           Reset
         </ion-item>
-        <ion-item class="item-divider">
-			Battles
-			<ion-item class="item-divider" ng-repeat-start="battle in battles">
-				{{battle.title}}
-				<ion-item nav-clear menu-close ng-repeat="scenario in battle.scenarios" href="#/app/scenario/{{scenario.id}}/turn">
-					<div><b><small>{{scenario.title}}</small></b></div>
-				  	<div><small>{{scenario.startDateTime | date:'MMM d, y h:mm a'}}</small></div>
-				  	<div><small>{{scenario.endDateTime | date:'MMM d, y h:mm a'}}</small></div>
-				</ion-item>	
-			</ion-item>		 
-			<div ng-repeat-end></div>		  
+        <ion-item ng-class="{active: isBattlesShown()}">
+			<div ng-click="toggleBattles()" >
+				<i class="icon" ng-class="isBattlesShown() ? 'ion-minus' : 'ion-plus'"></i>
+				Battles
+			</div>
+			<ion-list ng-show="isBattlesShown()">
+				<ion-item ng-repeat="battle in battles" 
+					ng-click="toggleBattle(battle)" ng-class="{active: isBattleShown(battle)}">
+					<ion-list>
+						<i class="icon" ng-class="isBattleShown(battle) ? 'ion-minus' : 'ion-plus'"></i>
+						<img class="battle-image" src="img/{{battle.img}}" />
+						{{battle.title}}
+						<ion-item nav-clear menu-close ng-repeat="scenario in battle.scenarios" href="#/app/scenario/{{scenario.id}}/turn"
+							ng-click="select(scenario)" ng-show="isBattleShown(battle)">
+							<div><b><small>{{scenario.title}}</small></b></div>
+						  	<div><small>{{scenario.startDateTime | date:'MMM d, y h:mm a'}}</small></div>
+						  	<div><small>{{scenario.endDateTime | date:'MMM d, y h:mm a'}}</small></div>
+						</ion-item>	
+					</ion-list>
+				</ion-item>		 
+			</ion-list>
         </ion-item>
 		
       </ion-list>
