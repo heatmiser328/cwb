@@ -9,7 +9,7 @@
         </button>
       </ion-nav-buttons>
     </ion-nav-bar>
-    <ion-nav-view name="menuContent"></ion-nav-view>
+    <ion-nav-view name="contentView"></ion-nav-view>
   </ion-side-menu-content>
 
   <ion-side-menu side="left">
@@ -19,14 +19,23 @@
     </ion-header-bar>
     <ion-content>
       <ion-list>
-        <ion-item nav-clear menu-close href="#/app/battles">
-          Battles
-        </ion-item>
         <ion-item nav-clear menu-close ng-click="save()">
           Save
         </ion-item>
         <ion-item nav-clear menu-close ng-click="reset()">
           Reset
+        </ion-item>
+        <ion-item class="item-divider">
+			Battles
+			<ion-item class="item-divider" ng-repeat-start="battle in battles">
+				{{battle.title}}
+				<ion-item nav-clear menu-close ng-repeat="scenario in battle.scenarios" href="#/app/scenario/{{scenario.id}}/turn">
+					<div><b><small>{{scenario.title}}</small></b></div>
+				  	<div><small>{{scenario.startDateTime | date:'MMM d, y h:mm a'}}</small></div>
+				  	<div><small>{{scenario.endDateTime | date:'MMM d, y h:mm a'}}</small></div>
+				</ion-item>	
+			</ion-item>		 
+			<div ng-repeat-end></div>		  
         </ion-item>
 		
       </ion-list>

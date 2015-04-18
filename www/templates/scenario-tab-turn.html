@@ -1,14 +1,17 @@
-<ion-view view-title="{{scenario.title}}" class="bubble-background">
+<ion-view view-title="{{scenario.battle.title}} - {{scenario.title}}" class="bubble-background">
+	<ion-content>
 		<div class="responsive-sm">
 			<div class="row">
-				<div class="col"><button class="button button-positive ion-chevron-left" ng-click="turnPrev()"></button></div>
-				<div class="col"><input type="text" readonly="readonly" ng-model="current.turn" /></div>
-				<div class="col"><button class="button button-positive ion-chevron-right" ng-click="turnNext()"></button></div>
+				<button class="col-10 button button-positive ion-chevron-left" ng-click="turnPrev()"></button>
+				<input  class="col-80 text-center" type="text" readonly="readonly" value="{{current.dateTime | date:'MMM d, y h:mm a'}}" />
+				<button class="col-10 button button-positive ion-chevron-right" ng-click="turnNext()"></button>
 			</div>
+			<br/>
 			<div class="row">
-				<div class="col"><button class="button button-positive ion-chevron-left" ng-click="phasePrev()"></button></div>
-				<div class="col"><input type="text" readonly="readonly" ng-model="current.phase" /></div>
-				<div class="col"><button class="button button-positive ion-chevron-right" ng-click="phaseNext()"></button></div>
+				<button class="col-10 button button-positive ion-chevron-left" ng-click="phasePrev()"></button>
+				<input class="col-80 text-center" type="text" readonly="readonly" ng-model="current.phase" />
+				<button class="col-10 button button-positive ion-chevron-right" ng-click="phaseNext()"></button>
 			</div>
 		</div>
+	</ion-content>
 </ion-view>

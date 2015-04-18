@@ -1,4 +1,5 @@
-// Ionic Starter App
+angular.module('cwb.controllers', []);
+angular.module('cwb.services', []);
 
 angular.module('cwb', ['ionic', 'cwb.controllers', 'cwb.services'])
 
@@ -22,33 +23,23 @@ angular.module('cwb', ['ionic', 'cwb.controllers', 'cwb.services'])
             url: '/app',
             abstract: true,
             templateUrl: 'templates/menu.html',
-            controller: 'AppCtrl'
+            controller: 'MainCtrl'
         })
-        .state('app.battles', {
-            url: '/battles',
+        .state('app.home', {
+            url: '/home',
             views: {
-                'menuContent': {
-                    templateUrl: 'templates/battles.html',
-                    controller: 'BattlesCtrl'
+                'contentView': {
+                    templateUrl: 'templates/main.html'
                 }
             }
         })
-        .state('app.scenarios', {
-        	url: '/scenarios/:battleId',
-            views: {
-            	'menuContent': {
-                	templateUrl: 'templates/scenarios.html',
-                    controller: 'ScenariosCtrl'
-				}
-            }
-        })
-        
+
         // setup an abstract state for the tabs directive
         .state('app.scenario', {
         	url: '/scenario/:scenarioId',
             abstract: true,
             views: {
-            	'menuContent': {
+            	'contentView': {
             		templateUrl: 'templates/scenario.html',
 	                controller: 'ScenarioCtrl'
 				}
@@ -56,15 +47,23 @@ angular.module('cwb', ['ionic', 'cwb.controllers', 'cwb.services'])
         })
         .state('app.scenario.turn', {
         	url: '/turn',
-            templateUrl: 'templates/scenario-tab-turn.html',
-            controller: 'ScenarioTurnCtrl'
+            views: {
+            	'scenario-turn': {
+		            templateUrl: 'templates/scenario-tab-turn.html',
+    		        controller: 'ScenarioTurnCtrl'
+				}               
+			}               
 		})
         .state('app.scenario.orders', {
         	url: '/orders',
-            templateUrl: 'templates/scenario-tab-orders.html',
-            controller: 'ScenarioOrdersCtrl'
+            views: {
+            	'scenario-orders': {
+		            templateUrl: 'templates/scenario-tab-orders.html',
+		            controller: 'ScenarioOrdersCtrl'
+                }
+            }
 		});
             
         // if none of the above states are matched, use this as the fallback
-        $urlRouterProvider.otherwise('/app/battles');
+        $urlRouterProvider.otherwise('/app/home');
     });
