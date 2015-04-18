@@ -19,12 +19,6 @@
     </ion-header-bar>
     <ion-content>
       <ion-list>
-        <ion-item nav-clear menu-close ng-click="save()">
-          Save
-        </ion-item>
-        <ion-item nav-clear menu-close ng-click="reset()">
-          Reset
-        </ion-item>
         <ion-item ng-class="{active: isBattlesShown()}">
 			<div ng-click="toggleBattles()" >
 				<i class="icon" ng-class="isBattlesShown() ? 'ion-minus' : 'ion-plus'"></i>

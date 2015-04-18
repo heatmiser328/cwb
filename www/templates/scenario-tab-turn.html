@@ -1,5 +1,9 @@
 <ion-view view-title="{{scenario.battle.title}} - {{scenario.title}}" class="bubble-background">
-	<ion-content>
+	<ion-nav-buttons side="right">
+      <button class="button ion-android-refresh" ng-click="reset()">
+      </button>
+   </ion-nav-buttons>
+	<ion-content padding="true">
 		<div class="responsive-sm">
 			<div class="row">
 				<button class="col-10 button button-positive ion-chevron-left" ng-click="turnPrev()"></button>

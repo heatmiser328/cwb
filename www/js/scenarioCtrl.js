@@ -7,6 +7,12 @@ angular.module('cwb.controllers')
     	load(id);
     });
     
+    $rootScope.$on('reset', function() {
+    	$log.info('reset scenario');
+        $scope.current = Current.new($scope.scenario);
+        Current.save($scope.current);
+    });
+    
     $rootScope.$on('save', function() {
     	$log.info('Save scenario');
         Current.save($scope.current);
@@ -22,7 +28,7 @@ angular.module('cwb.controllers')
 	        if (current.scenario != data.id) {
 	        	current = null;
 	        }
-	        $scope.current = current || Current.new(data)
+	        $scope.current = current || Current.new(data);
 		})
 		.catch(function(err) {
 			$log.error('failed to retrieve scenario');

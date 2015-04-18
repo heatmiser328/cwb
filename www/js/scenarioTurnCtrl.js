@@ -1,22 +1,31 @@
 angular.module('cwb.controllers')
 
-.controller('ScenarioTurnCtrl', function($scope, $log, Phases) {
+.controller('ScenarioTurnCtrl', function($rootScope, $scope, $log, Phases) {
 	$log.info('load scenario turn controller');
+    
+    $scope.reset = function() {
+    	$rootScope.$emit('reset');
+    }
+    
     $scope.turnPrev = function() {
     	$log.debug('previous turn');
     	changeTurn(-1);
+    	$rootScope.$emit('save');
     }
     $scope.turnNext = function() {
     	$log.debug('next turn');
     	changeTurn(1);
+    	$rootScope.$emit('save');
     }
     $scope.phasePrev = function() {
     	$log.debug('previous phase');
     	changePhase(-1);
+    	$rootScope.$emit('save');
     }
     $scope.phaseNext = function() {
     	$log.debug('next phase');
     	changePhase(1);
+    	$rootScope.$emit('save');
     }
     
     function changeTurn(c) {
