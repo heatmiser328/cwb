@@ -4,7 +4,7 @@ angular.module('cwb.services')
 	var battles = [];
     var url = '';
     if(ionic.Platform.isAndroid()){
-    	url = '/android_asset/www/';
+    	url = 'file:///android_asset/www';
 	}
     
     function load() {
