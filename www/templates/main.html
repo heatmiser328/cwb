@@ -1,5 +1,11 @@
-<ion-view view-title="Home">
+<ion-view view-title="CWB Assistant">
   <ion-content padding="true">
-    <h3>Welcome</h3>
+    <div ng-show="noCurrent()">
+      <h3>Welcome</h3>
+      <p>
+        Please choose a Scenario to get started!
+      </p>
+    </div>
+
   </ion-content>
 </ion-view>

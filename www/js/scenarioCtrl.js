@@ -10,12 +10,11 @@ angular.module('cwb.controllers')
     $rootScope.$on('reset', function() {
     	$log.info('reset scenario');
         $scope.current = Current.new($scope.scenario);
-        Current.save($scope.current);
+    	save();
     });
     
     $rootScope.$on('save', function() {
-    	$log.info('Save scenario');
-        Current.save($scope.current);
+    	save();
     });
     
     function load(id) {
@@ -25,7 +24,7 @@ angular.module('cwb.controllers')
 	        $scope.scenario = data;
 	        // current scenario settings: turn, orders, roster, etc.
 	        var current = Current.load();
-	        if (current.scenario != data.id) {
+	        if (current && current.scenario != data.id) {
 	        	current = null;
 	        }
 	        $scope.current = current || Current.new(data);
@@ -35,8 +34,16 @@ angular.module('cwb.controllers')
 			$log.error(err);
 	        $scope.scenario = {};
 	        $scope.current = {};
-		});
+		})
+        .finally(function() {
+        	save();
+        });
 	}        
+    
+    function save() {
+    	$log.info('Save scenario');
+        Current.save($scope.current);
+    }
     
     load($stateParams.scenarioId);
 });

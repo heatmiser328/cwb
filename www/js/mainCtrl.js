@@ -1,26 +1,15 @@
 angular.module('cwb.controllers')
 
-.controller('MainCtrl', function($rootScope, $scope, $location, $log, Battles) {
+.controller('MainCtrl', function($rootScope, $scope, $location, $log, Battles, Current) {
     $log.info('Load App Controller');
 
-	$scope.save = function() {
-    	$rootScope.$emit('save');
-    }
-    
-	$scope.reset = function() {
-    }
-
 	$scope.select = function(scenario) {
-        //$location.path('/app/scenario/' + scenario.id + '/turn');
     	$rootScope.$emit('load', scenario.id);
     }
     
-    $scope.toggleBattles = function() {
-		$scope.shownBattles = !$scope.shownBattles;
-	}
-    $scope.isBattlesShown = function() {
-    	return !!$scope.shownBattles;
-	}
+    $scope.noCurrent = function() {
+    	return !Current.load();
+    }
     
     $scope.toggleBattle = function(battle) {
     	if ($scope.isBattleShown(battle)) {
@@ -36,10 +25,14 @@ angular.module('cwb.controllers')
     Battles.load()
     .then(function(data) {
         $scope.battles = data;
+        var current = Current.load();
+        if (current && current.scenario) {
+        	//$state.go('app.scenario.turn');
+            $location.path('/app/scenario/' + current.scenario + '/turn');
+        }
     })
     .catch(function(err) {
     	$log.error(err);
     });
 
-    // retrieve current game; go to scenario state, etc
 });
