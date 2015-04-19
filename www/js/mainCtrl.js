@@ -28,6 +28,7 @@ angular.module('cwb.controllers')
         var current = Current.load();
         if (current && current.scenario) {
         	//$state.go('app.scenario.turn');
+            $log.debug('initial load');
             $location.path('/app/scenario/' + current.scenario + '/turn');
         }
     })

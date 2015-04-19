@@ -1,3 +1,39 @@
-<ion-view view-title="{{scenario.title}} Orders">
-  	<div>This is the orders control</div>
+<ion-view view-title="{{scenario.battle.title}} - {{scenario.title}}" class="bubble-background">
+	<ion-nav-buttons side="right">
+      <button class="button ion-android-refresh" ng-click="reset()">
+      </button>
+	</ion-nav-buttons>
+	<ion-content padding="true">
+		<ion-list>
+			<ion-item ng-repeat="army in current.orders" ng-class="{active: isArmyShown(army)}">
+				<div class="row">
+					<div class="col-25" ng-click="toggleArmy(army)">
+						<i class="icon" ng-class="isArmyShown(army) ? 'ion-minus' : 'ion-plus'"></i>
+						<img class="army-image" src="img/{{army.country}}.png" />
+						{{army.name}}
+					</div>
+					<button class="col-10 button button-balanced button-small icon ion-document" ng-click="add()"></button>
+					<div>&nbsp;</div>
+					<button class="col-10 button button-energized button-small icon ion-ios-lightbulb-outline" ng-click="initiative()"></button>
+					
+				</div>					
+				<ion-list>
+					<ion-item ng-repeat="order in army.orders" ng-show="isArmyShown(army)">
+						<div class="row">
+							<img class="col-5 order-image" src="img/{{order.status}}.png" />
+							<input class="col-20" type="text" readonly="readonly" value="{{order.receiver}}" />
+							<input class="col-35" type="text" readonly="readonly" value="{{order.dateTime | date:'MMM d, y h:mm a'}}" />
+							<small class="col-10 text-right"><input type="text" readonly="readonly" value="{{order.method}}" /></small>
+							<button class="col-10 button button-positive button-small icon ion-edit" ng-click="edit()"></button>
+							<div>&nbsp;</div>
+							<button class="col-10 button button-assertive button-small icon ion-trash-a" ng-click="delete()"></button>
+							<div>&nbsp;</div>
+							<button class="col-10 button button-calm button-small icon ion-close-circled" ng-click="stop()"></button>
+						</div>
+					</ion-item>	
+				</ion-list>
+			</ion-item>		 
+		</ion-list>
+	</ion-content>
+	
 </ion-view>

@@ -1,7 +1,7 @@
 [{
 		"id" : 1,
 		"title" : "April's Harvest",
-  		"img": "aprilsharvest.jpg",
+		"img" : "aprilsharvest.jpg",
 		"armies" : [{
 				"id" : 1,
 				"name" : "ATenn",
@@ -855,6 +855,10 @@
 							}
 						]
 					}, {
+						"country" : "USA",
+						"army" : "AOhio",
+						"orders" : []						
+					}, {
 						"country" : "CSA",
 						"army" : "AMiss",
 						"orders" : [{
@@ -914,7 +918,7 @@
 	}, {
 		"id" : 2,
 		"title" : "August Fury",
-  		"img": "augustfury.jpg",
+		"img" : "augustfury.jpg",
 		"armies" : [{
 				"id" : 4,
 				"name" : "AVa",
@@ -2112,6 +2116,10 @@
 								"status" : "Accepted"
 							}
 						]
+					}, {
+						"country" : "USA",
+						"army" : "APot",
+						"orders" : []						
 					}
 				]
 			}
@@ -2119,7 +2127,7 @@
 	}, {
 		"id" : 3,
 		"title" : "Champion Hill",
-  		"img": "championhill.jpg",
+		"img" : "championhill.jpg",
 		"armies" : [{
 				"id" : 7,
 				"name" : "ATenn",
@@ -2838,6 +2846,14 @@
 								"status" : "Accepted"
 							}
 						]
+					}, {
+						"country" : "CSA",
+						"army" : "AMiss",
+						"orders" : []						
+					}, {
+						"country" : "CSA",
+						"army" : "ARelf",
+						"orders" : []						
 					}
 				]
 			}, {
@@ -2850,7 +2866,19 @@
 				"confederateCasualty" : 0,
 				"unionAmmo" : 40,
 				"unionCasualty" : 0,
-				"defaultOrders" : []
+				"defaultOrders" : [{
+						"country" : "USA",
+						"army" : "ATenn",
+						"orders" : []						
+					}, {
+						"country" : "CSA",
+						"army" : "AMiss",
+						"orders" : []						
+					}, {
+						"country" : "CSA",
+						"army" : "ARelf",
+						"orders" : []						
+					}]
 			}, {
 				"id" : 5,
 				"title" : "Pemberton on the Attack",
@@ -2861,7 +2889,19 @@
 				"confederateCasualty" : 0,
 				"unionAmmo" : 40,
 				"unionCasualty" : 0,
-				"defaultOrders" : []
+				"defaultOrders" : [{
+						"country" : "USA",
+						"army" : "ATenn",
+						"orders" : []						
+					}, {
+						"country" : "CSA",
+						"army" : "AMiss",
+						"orders" : []						
+					}, {
+						"country" : "CSA",
+						"army" : "ARelf",
+						"orders" : []						
+					}]
 			}, {
 				"id" : 6,
 				"title" : "The Gathering of Hosts",
@@ -2918,6 +2958,10 @@
 								"status" : "Accepted"
 							}
 						]
+					}, {
+						"country" : "CSA",
+						"army" : "ARelf",
+						"orders" : []						
 					}
 				]
 			}, {
@@ -3084,7 +3128,7 @@
 	}, {
 		"id" : 4,
 		"title" : "Three Battles of Manassas",
-  		"img": "threebattlesofmanassas.jpg",
+		"img" : "threebattlesofmanassas.jpg",
 		"armies" : [{
 				"id" : 10,
 				"name" : "ANEVa",
@@ -3641,6 +3685,14 @@
 								"status" : "Accepted"
 							}
 						]
+					}, {
+						"country" : "CSA",
+						"army" : "APot",
+						"orders" : []						
+					}, {
+						"country" : "CSA",
+						"army" : "AShen",
+						"orders" : []						
 					}
 				]
 			}, {
@@ -3747,7 +3799,7 @@
 	}, {
 		"id" : 5,
 		"title" : "In Their Quiet Fields",
-  		"img": "intheirquietfields.jpg",
+		"img" : "intheirquietfields.jpg",
 		"armies" : [{
 				"id" : 13,
 				"name" : "ANVa",
@@ -3779,7 +3831,15 @@
 				"confederateCasualty" : 0,
 				"unionAmmo" : 250,
 				"unionCasualty" : 0,
-				"defaultOrders" : []
+				"defaultOrders" : [{
+						"country" : "USA",
+						"army" : "APot",
+						"orders" : []						
+					}, {
+						"country" : "CSA",
+						"army" : "ANVa",
+						"orders" : []						
+					}]
 			}, {
 				"id" : 12,
 				"title" : "Bloody Lane - Antietam's Second Phase",
@@ -3790,13 +3850,21 @@
 				"confederateCasualty" : 0,
 				"unionAmmo" : 250,
 				"unionCasualty" : 0,
-				"defaultOrders" : []
+				"defaultOrders" : [{
+						"country" : "USA",
+						"army" : "APot",
+						"orders" : []						
+					}, {
+						"country" : "CSA",
+						"army" : "ANVa",
+						"orders" : []						
+					}]
 			}
 		]
 	}, {
 		"id" : 6,
 		"title" : "No Better Place To Die",
-  		"img": "nobetterplacetodie.jpg",
+		"img" : "nobetterplacetodie.jpg",
 		"armies" : [{
 				"id" : 15,
 				"name" : "ACumb",
@@ -4115,6 +4183,10 @@
 								"status" : "Accepted"
 							}
 						]
+					}, {
+						"country" : "USA",
+						"army" : "ACumb",
+						"orders" : []
 					}
 				]
 			}, {
@@ -4168,6 +4240,10 @@
 								"status" : "Accepted"
 							}
 						]
+					}, {
+						"country" : "USA",
+						"army" : "ACumb",
+						"orders" : []
 					}
 				]
 			}
@@ -4175,7 +4251,7 @@
 	}, {
 		"id" : 7,
 		"title" : "The Seven Days",
-  		"img": "sevendays.jpg",
+		"img" : "sevendays.jpg",
 		"armies" : [{
 				"id" : 17,
 				"name" : "APot",
@@ -5472,7 +5548,7 @@
 	}, {
 		"id" : 8,
 		"title" : "Seven Pines",
-  		"img": "sevenpines.jpg",
+		"img" : "sevenpines.jpg",
 		"armies" : [{
 				"id" : 19,
 				"name" : "APot",
@@ -6217,7 +6293,7 @@
 	}, {
 		"id" : 9,
 		"title" : "Strike Them A Blow",
-  		"img": "strikethemablow.jpg",
+		"img" : "strikethemablow.jpg",
 		"armies" : [{
 				"id" : 21,
 				"name" : "APot",

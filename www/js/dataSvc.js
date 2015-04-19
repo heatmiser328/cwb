@@ -61,7 +61,14 @@ angular.module('cwb.services')
                             dayTimeIncr: battle.dayTimeIncr,
                             nightTimeIncr: battle.nightTimeIncr,
                             dawnTime: battle.dawnTime,
-                            duskTime: battle.duskTime
+                            duskTime: battle.duskTime,
+                            armies: _.map(battle.armies, function(army) {
+                            	return {
+                                	country: army.country,
+                                	name: army.name,
+                                	commander: army.commander
+                                };
+                            })
 						};                            
 		            	return deferred.resolve(s);
 		            }
@@ -148,7 +155,7 @@ angular.module('cwb.services')
                 unionAmmo: scenario.unionAmmo,
                 unionCasualty: scenario.unionCasualty,
                 unionVP: 0,
-                orders: angular.copy(scenario.orders)
+                orders: angular.copy(scenario.defaultOrders)
             };
         },
     	load: function() {
