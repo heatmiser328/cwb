@@ -211,6 +211,24 @@ angular.module('cwb.services')
 			return 12;
 		},
         
+        accept: function(dice, sender, receiver, currentorders, method, type) {
+        	var method = _.find(this.methods, function(om) {
+            	return om.method == method;
+            });
+        	var type = _.find(this.types, function(ot) {
+            	return ot.type == type;
+            });
+        
+        	var accept = sender + receiver + method.acceptance + type.acceptance + (currentorders ? -1 : 0);
+            
+            var oa = this.getAcceptance(accept);
+			
+            // turn into an index
+            dice -= 2;
+            
+            return this.statuses[oa.statuses[dice]];
+        },
+        
         delayReduction: function(die, status) {
         	var os = _.find(this.statuses, function(s) {
             	return s.type == status;

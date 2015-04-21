@@ -1,0 +1,18 @@
+<div class="list">
+	<label class="item item-input">
+		<span class="input-label">Sender</span>
+		<input type="number" class="text-center" ng-model="accept.sender" min="-1" max="5"></input>
+    </label>
+	<label class="item item-input">
+		<span class="input-label">Receiver</span>
+		<input type="number" class="text-center" ng-model="accept.receiver" min="-1" max="5"></input>
+    </label>
+	<div class="item">
+		<ion-checkbox ng-model="accept.current">Current Orders</ion-checkbox>
+    </div>
+	<div class="text-center">
+		<div class="die" ng-class="dieClasses[accept.die1]"></div>
+		<div class="die" ng-class="dieClasses[accept.die2]"></div>
+		<h3 class="title"><i>{{accept.status.desc}}</i></h3>
+	</div>
+</div>

@@ -77,7 +77,48 @@ angular.module('cwb.controllers')
     $scope.accept = function(order) {
     	// present the acceptance modal
         $log.info('Accept order for ' + order.country + '/' + order.army);
+        $scope.accept = {
+        	die1: 0,
+            die2: 0,
+        	status: Orders.getStatus(order.status),
+            sender: 1,
+            receiver: 1,
+            current: false
+		};
+        
+        function accept() {
+            var dice = new Dice.Dice(2, 1, 6);
+            dice.roll();
+            $scope.accept.die1 = dice.getDie(1);
+            $scope.accept.die2 = dice.getDie(2);
+            $scope.accept.status = Orders.accept($scope.accept.die1 + $scope.accept.die2, $scope.accept.sender, $scope.accept.receiver, $scope.accept.current, order.method, order.type);
+        }
+        $ionicPopup.show({
+        	templateUrl: 'templates/order-acceptance.html',
+            title: 'Acceptance',
+            scope: $scope,
+            buttons: [
+            	{ text: 'Close' },
+                {
+                	text: '<b>Roll</b>',
+                    type: 'button-positive',
+                    onTap: function(e) {
+                    	e.preventDefault();
+                        accept();
+					}
+				}
+			]
+		}).then(function(ok) {
+        	//if (ok) {
+            	// update the new status
+                $log.info('Setting status for Order to ' + $scope.accept.status.type);
+                order.status = $scope.accept.status.type;
+                delete $scope['accept'];
+                $scope.save();
+            //}
+		});
 	}
+    
     $scope.reduce = function(order) {
     	// present the reduction modal
         $log.info('Reduce Order Delay for ' + order.country + '/' + order.army);
@@ -122,7 +163,6 @@ angular.module('cwb.controllers')
     $scope.stop = function(order) {
     	// present the stoppage modal
         $log.info('Stop order for ' + order.country + '/' + order.army);
-        
         $scope.stop = {
         	die1: 0,
             die2: 0,
@@ -165,7 +205,6 @@ angular.module('cwb.controllers')
                 $scope.save();
             //}
 		});
-        
 	}
     
     // order detail
