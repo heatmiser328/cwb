@@ -1,6 +1,6 @@
 angular.module('cwb.controllers')
 
-.controller('ScenarioCtrl', function($rootScope, $scope, $log, $stateParams, Battles, Current) {
+.controller('ScenarioCtrl', function($rootScope, $scope, $log, $stateParams, $ionicPopup, Battles, Current) {
 	$log.info('load scenario controller');
     
     $rootScope.$on('load', function(e, id) {
@@ -23,6 +23,14 @@ angular.module('cwb.controllers')
 
 	$scope.save = function() {
 		$rootScope.$emit('save');
+	}
+   
+	// A confirm dialog
+    $scope.showConfirm = function(title, message) {
+    	return $ionicPopup.confirm({
+        	title: title || 'Confirm Action',
+            template: message || 'Are you sure you want to perform this action?'
+		});
 	}
 
     function load(id) {

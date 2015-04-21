@@ -50,7 +50,25 @@ angular.module('cwb.controllers')
 	}
     $scope.delete = function(order) {
     	// remove the order (prompt??)
+        var orders = $scope.shownArmy.orders;
         $log.info('Delete order for ' + order.country + '/' + order.army);
+        $scope.showConfirm('Order Delete', 'Are you sure you want to remove this Order?')
+        .then(function(ok) {
+        	if (ok) {
+	        	var idx = _.findIndex(orders, function(o) {
+	            	return o.id == order.id;
+	            });
+	            if (idx > -1) {
+	        		$log.debug('removing order at ' + idx + ' for ' + order.country + '/' + order.army);
+	            	orders.splice(idx, 1);
+	                $scope.save();
+	            }
+            }
+        })
+        .catch(function(err) {
+        	$log.error('failed to remove order for ' + order.country + '/' + order.army);
+        	$log.error(err);
+        });
 	}
     $scope.initiative = function(army) {
     	// present the initiative modal
@@ -79,7 +97,7 @@ angular.module('cwb.controllers')
     $scope.types = Orders.types;
     $scope.methods = Orders.methods;
     
-    $scope.accept = function() {
+    $scope.ok = function() {
     	// retrieve values(?), add/update the current orders collection
         $log.info('Accepted order detail');
         var order = angular.copy($scope.order);
