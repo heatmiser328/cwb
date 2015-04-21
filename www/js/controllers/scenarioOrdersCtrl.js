@@ -3,9 +3,11 @@ angular.module('cwb.controllers')
 .controller('ScenarioOrdersCtrl', function($rootScope, $scope, $log, $ionicModal, Orders, Roster) {
 	$log.info('load scenario orders controller');
     
+    /*
     $scope.reset = function() {
     	$rootScope.$emit('reset');
     }
+    */
     
     $scope.toggleArmy = function(army) {
     	if ($scope.isArmyShown(army)) {
@@ -33,16 +35,18 @@ angular.module('cwb.controllers')
 			"status" : $scope.statuses[0]
 		};
         $log.info('Add New order for ' + army.country + '/' + army.army);
-        $scope.openOrderDetail(army, neworder);
+    	$scope.orderid = undefined;
+        openOrderDetail(army, neworder);
 	}
     $scope.edit = function(order) {
+    	$scope.orderid = order.id;
     	var editorder = angular.copy(order);
         editorder.type = Orders.getType(order.type);
         editorder.method = Orders.getMethod(order.method);
         editorder.status = Orders.getStatus(order.status);
         editorder.dateTime = new Date(editorder.dateTime);
         $log.info('Edit order for ' + order.country + '/' + order.army);
-        $scope.openOrderDetail($scope.shownArmy, editorder);
+        openOrderDetail($scope.shownArmy, editorder);
 	}
     $scope.delete = function(order) {
     	// remove the order (prompt??)
@@ -75,31 +79,62 @@ angular.module('cwb.controllers')
     $scope.types = Orders.types;
     $scope.methods = Orders.methods;
     
-    $scope.openOrderDetail = function(army, order) {
-        $scope.superiorLeaders = Roster.getSuperiorLeaders($scope.scenario, {country: army.country, name: army.army});
-        $scope.subordinateLeaders = Roster.getSubordinateLeaders($scope.scenario, {country: army.country, name: army.army});
-        order.sender = $scope.superiorLeaders[0];
-        $scope.order = order;
-        
-    	$scope.detailModal.show();
-	}
-    $scope.closeOrderDetail = function() {
-    	$scope.detailModal.hide();
-	}
-    
     $scope.accept = function() {
     	// retrieve values(?), add/update the current orders collection
         $log.info('Accepted order detail');
-    	$scope.closeOrderDetail();
+        var order = angular.copy($scope.order);
+        order.type = $scope.order.type.type;
+        order.method = $scope.order.method.method;
+        order.status = $scope.order.status.type;
+        order.dateTime = order.dateTime.toISOString();
+        if ($scope.orderid) {
+        	var idx = _.findIndex($scope.orders, function(o) {
+            	return o.id == $scope.orderid;
+            });
+            if (idx > -1) {
+            	$log.debug('updating order at ' + idx);
+            	$scope.orders.splice(idx, 1, order);
+            }
+            else {
+            	$log.debug('appending updated order');
+            	$scope.orders.push(order);
+			}               
+        }
+        else {
+        	$log.debug('appending new order');
+        	$scope.orders.push(order);
+        }
+        $scope.save();
+        
+    	closeOrderDetail();
     }
     
     $scope.cancel = function() {
-        $log.debug('Cancelled order detail');
-    	$scope.closeOrderDetail();
+        $log.info('Cancelled order detail');
+    	closeOrderDetail();
     }
     
     $scope.$on('$destroy', function() {
     	$scope.detailModal.remove();
 	});    
+    
+    function openOrderDetail(army, order) {
+        $scope.superiorLeaders = Roster.getSuperiorLeaders($scope.scenario, {country: army.country, name: army.army});
+        $scope.subordinateLeaders = Roster.getSubordinateLeaders($scope.scenario, {country: army.country, name: army.army});
+        order.sender = $scope.superiorLeaders[0];
+        $scope.order = order;
+        $scope.orders = army.orders;
+        
+    	$scope.detailModal.show();
+	}
+    function closeOrderDetail() {
+        $scope.superiorLeaders = undefined;
+        $scope.subordinateLeaders = undefined;
+        $scope.orderid = undefined;
+        $scope.order = undefined;
+        $scope.orders = undefined;
+        
+    	$scope.detailModal.hide();
+	}
 });
 

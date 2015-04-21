@@ -1,6 +1,6 @@
 <ion-view view-title="{{scenario.battle.title}} - {{scenario.title}}" class="bubble-background">
 	<ion-nav-buttons side="right">
-      <button class="button ion-android-refresh" ng-click="reset()">
+      <button class="button button-large icon ion-android-refresh" ng-click="reset()">
       </button>
 	</ion-nav-buttons>
 	<ion-content padding="true">
@@ -10,7 +10,7 @@
 					<div class="col-25" ng-click="toggleArmy(army)">
 						<i class="icon" ng-class="isArmyShown(army) ? 'ion-minus' : 'ion-plus'"></i>
 						<img class="army-image" src="img/{{army.country}}.png" />
-						{{army.name}}
+						{{army.army}}
 					</div>
 					<button class="col-10 button button-balanced button-small icon ion-document" ng-click="add(army)"></button>
 					<div>&nbsp;</div>

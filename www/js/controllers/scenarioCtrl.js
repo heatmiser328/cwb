@@ -16,7 +16,15 @@ angular.module('cwb.controllers')
     $rootScope.$on('save', function() {
     	save();
     });
-    
+
+	$scope.reset = function() {
+		$rootScope.$emit('reset');
+	}
+
+	$scope.save = function() {
+		$rootScope.$emit('save');
+	}
+
     function load(id) {
 	    Battles.getScenario(id)
 		.then(function(data) {
