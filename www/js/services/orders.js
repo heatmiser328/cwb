@@ -1,6 +1,95 @@
 angular.module('cwb.services')
 
 .factory('Orders', function() {
+	var acceptances = [
+    	{
+        	acceptance: -3,
+            statuses: [4,4,3,3,3,3,2,3,4,4,4]
+        },
+    	{
+        	acceptance: -1,
+            statuses: [4,4,3,3,3,2,2,3,3,4,4]
+        },
+    	{
+        	acceptance: 1,
+            statuses: [4,4,3,3,3,2,2,2,3,3,4]
+        },
+    	{
+        	acceptance: 3,
+            statuses: [4,4,3,3,1,2,2,2,3,3,3]
+        },
+    	{
+        	acceptance: 5,
+            statuses: [4,3,2,1,2,2,3,1,2,2,3]
+        },
+    	{
+        	acceptance: 7,
+            statuses: [4,3,1,1,2,2,2,1,1,3,3]
+        },
+    	{
+        	acceptance: 999,
+            statuses: [4,3,1,1,1,2,2,1,2,3,3]
+        }
+    ];
+
+	var stoppage = [
+    	{
+        	leader: 0,
+            stoppage: [4, 7, 10, 12]
+		},
+    	{
+        	leader: 2,
+            stoppage: [3, 6, 9, 11]
+		},
+    	{
+        	leader: 4,
+            stoppage: [3, 5, 8, 10]
+		}
+    ];
+    var stoppagePoints = [
+    	{
+        	totdivs: 1,
+            pts: [1,3,4]
+        },
+    	{
+        	totdivs: 2,
+            pts: [1,2,3,4]
+        },
+    	{
+        	totdivs: 3,
+            pts: [1, 2, 2, 3, 4]
+        },
+    	{
+        	totdivs: 4,
+            pts: [1, 2, 2, 2, 3, 4]
+        },
+    	{
+        	totdivs: 5,
+            pts: [1, 1, 2, 2, 3, 3, 4]
+        },
+    	{
+        	totdivs: 6,
+            pts: [1, 1, 2, 2, 2, 3, 3, 4]
+        },
+    	{
+        	totdivs: 7,
+            pts: [1, 1, 2, 2, 2, 2, 3, 3, 4]
+        },
+    	{
+        	totdivs: 8,
+            pts: [1, 1, 2, 2, 2, 2, 2, 3, 3, 4]
+        },
+    	{
+        	totdivs: 9,
+            pts: [1, 1, 1, 2, 2, 2, 2, 3, 3, 3, 4]
+        },
+    	{
+        	totdivs: 10,
+            pts: [1, 1, 1, 2, 2, 2, 2, 2, 3, 3, 3, 4]
+        }
+    ];
+    
+
 	return {
         methods: [
 	        {
@@ -86,107 +175,18 @@ angular.module('cwb.services')
         	return _.find(this.statuses, function(s) {return s.type == status;});
         },
         
-        acceptances: [
-        	{
-            	acceptance: -3,
-                statuses: [4,4,3,3,3,3,2,3,4,4,4]
-            },
-        	{
-            	acceptance: -1,
-                statuses: [4,4,3,3,3,2,2,3,3,4,4]
-            },
-        	{
-            	acceptance: 1,
-                statuses: [4,4,3,3,3,2,2,2,3,3,4]
-            },
-        	{
-            	acceptance: 3,
-                statuses: [4,4,3,3,1,2,2,2,3,3,3]
-            },
-        	{
-            	acceptance: 5,
-                statuses: [4,3,2,1,2,2,3,1,2,2,3]
-            },
-        	{
-            	acceptance: 7,
-                statuses: [4,3,1,1,2,2,2,1,1,3,3]
-            },
-        	{
-            	acceptance: 999,
-                statuses: [4,3,1,1,1,2,2,1,2,3,3]
-            }
-        ],
 		getAcceptance: function(acceptance) {
-        	return _.find(this.orderAcceptances, function(oa) {
+        	return _.find(acceptances, function(oa) {
             	return acceptance <= oa.acceptance;
             });
 		},
         
-		
-        stoppagePoints: [
-        	{
-            	totdivs: 1,
-                pts: [1,3,4]
-            },
-        	{
-            	totdivs: 2,
-                pts: [1,2,3,4]
-            },
-        	{
-            	totdivs: 3,
-                pts: [1, 2, 2, 3, 4]
-            },
-        	{
-            	totdivs: 4,
-                pts: [1, 2, 2, 2, 3, 4]
-            },
-        	{
-            	totdivs: 5,
-                pts: [1, 1, 2, 2, 3, 3, 4]
-            },
-        	{
-            	totdivs: 6,
-                pts: [1, 1, 2, 2, 2, 3, 3, 4]
-            },
-        	{
-            	totdivs: 7,
-                pts: [1, 1, 2, 2, 2, 2, 3, 3, 4]
-            },
-        	{
-            	totdivs: 8,
-                pts: [1, 1, 2, 2, 2, 2, 2, 3, 3, 4]
-            },
-        	{
-            	totdivs: 9,
-                pts: [1, 1, 1, 2, 2, 2, 2, 3, 3, 3, 4]
-            },
-        	{
-            	totdivs: 10,
-                pts: [1, 1, 1, 2, 2, 2, 2, 2, 3, 3, 3, 4]
-            }
-        ],
-        
-        stoppage: [
-        	{
-            	leader: 0,
-                stoppage: [4, 7, 10, 12]
-			},
-        	{
-            	leader: 2,
-                stoppage: [3, 6, 9, 11]
-			},
-        	{
-            	leader: 4,
-                stoppage: [3, 5, 8, 10]
-			}
-        ],
-        
 		cost: function(order) {
         	var cost = 0;
-            var method = _.find(this.orderMethods, function(method) {
+            var method = _.find(this.methods, function(method) {
             	return order.method === method.method;
             });
-            var type = _.find(this.orderTypes, function(type) {
+            var type = _.find(this.types, function(type) {
             	return type.type == order.type;
             });
             
@@ -220,7 +220,30 @@ angular.module('cwb.services')
             	return this.statuses[1];	// accepted
             }
             return os;	// original status
+        },
+        
+        stop: function(dice, totaldiv, wreckeddiv, leader, leaderlost, defensiveorder, night) {
+        	
+			if (leaderlost) { wreckeddiv++; }
+			if (night) { dice -= 3; }
+			if (defensiveorder) { dice++; }
+			
+			var osp = _.find(stoppagePoints, function(osp) {
+            	return osp.totdivs <= totaldiv;
+            });
+            if (wreckeddiv >= osp.pts.length) {
+            	wreckeddiv = osp.pts.length - 1;
+            }
+            var stop = osp.pts[wreckeddiv] - 1;	// index-ify
+            var os = _.find(stoppage, function(os) {
+            	return os.leader <= leader;
+            });
+            
+			if (dice < os.stoppage[stop])
+            	return this.statuses[5];	// stopped
+			return this.statuses[1];	// still accepted
         }
+        
         
 	};
 });

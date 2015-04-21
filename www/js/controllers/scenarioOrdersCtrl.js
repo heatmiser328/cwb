@@ -86,9 +86,7 @@ angular.module('cwb.controllers')
         function reduce() {
             var dice = new Dice.Dice(1, 1, 6);
             dice.roll();
-            dice.each(function(die, index) {
-            	$scope.reduceDie = die.getValue();
-            });
+            $scope.reduceDie = dice.getDie(1);
             $scope.reduceStatus = Orders.delayReduction($scope.reduceDie, $scope.reduceOrigStatus.type);
         }
         reduce();
@@ -111,6 +109,7 @@ angular.module('cwb.controllers')
         	//if (ok) {
             	// update the new status
                 $log.info('Setting status for Order to ' + $scope.reduceStatus.type);
+                $scope.reduceOrigStatus = undefined;
                 $scope.reduceStatus = undefined;
                 $scope.reduceDie = undefined;
                 
@@ -123,6 +122,50 @@ angular.module('cwb.controllers')
     $scope.stop = function(order) {
     	// present the stoppage modal
         $log.info('Stop order for ' + order.country + '/' + order.army);
+        
+        $scope.stop = {
+        	die1: 0,
+            die2: 0,
+        	status: Orders.getStatus(order.status),
+            total: 1,
+            wrecked: 0,
+            leader: 0,
+            leaderLost: false,
+            action: 'attack'
+		};
+        
+        function stop() {
+            var dice = new Dice.Dice(2, 1, 6);
+            dice.roll();
+            $scope.stop.die1 = dice.getDie(1);
+            $scope.stop.die2 = dice.getDie(2);
+            $scope.stop.status = Orders.stop($scope.stop.die1 + $scope.stop.die2, $scope.stop.total, $scope.stop.wrecked, $scope.stop.leader, $scope.stop.leaderLost, $scope.stop.action == 'defend');
+        }
+        $ionicPopup.show({
+        	templateUrl: 'templates/order-stoppage.html',
+            title: 'Stoppage',
+            scope: $scope,
+            buttons: [
+            	{ text: 'Close' },
+                {
+                	text: '<b>Roll</b>',
+                    type: 'button-positive',
+                    onTap: function(e) {
+                    	e.preventDefault();
+                        stop();
+					}
+				}
+			]
+		}).then(function(ok) {
+        	//if (ok) {
+            	// update the new status
+                $log.info('Setting status for Order to ' + $scope.stop.status.type);
+                order.status = $scope.stop.status.type;
+                delete $scope['stop'];
+                $scope.save();
+            //}
+		});
+        
 	}
     
     // order detail
