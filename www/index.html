@@ -5,8 +5,8 @@
     <meta name="viewport" content="initial-scale=1, maximum-scale=1, user-scalable=no, width=device-width">
     <title>CWB Assistant</title>
 
-    <link href="lib/ionic/css/ionic.min.css" rel="stylesheet">
     <link href="lib/bootstrap/css/bootstrap.min.css" rel="stylesheet">
+    <link href="lib/ionic/css/ionic.min.css" rel="stylesheet">
     <link href="css/style.css" rel="stylesheet">
 
     <!-- IF using Sass (run gulp sass first), then uncomment below and remove the CSS includes above
@@ -26,11 +26,15 @@
 
     <!-- your app's js -->
     <script src="js/app.js"></script>
-    <script src="js/mainCtrl.js"></script>
-    <script src="js/scenarioCtrl.js"></script>
-    <script src="js/scenarioTurnCtrl.js"></script>
-    <script src="js/scenarioOrdersCtrl.js"></script>
-    <script src="js/dataSvc.js"></script>
+    <script src="js/controllers/mainCtrl.js"></script>
+    <script src="js/controllers/scenarioCtrl.js"></script>
+    <script src="js/controllers/scenarioTurnCtrl.js"></script>
+    <script src="js/controllers/scenarioOrdersCtrl.js"></script>
+    <script src="js/services/phases.js"></script>
+    <script src="js/services/battles.js"></script>
+    <script src="js/services/current.js"></script>
+    <script src="js/services/roster.js"></script>
+    <script src="js/services/orders.js"></script>
   </head>
 
   <body ng-app="cwb">

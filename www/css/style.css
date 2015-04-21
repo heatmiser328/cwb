@@ -10,4 +10,10 @@
 
 .army-image {
     height: 27px;
+    vertical-align: middle;
+}
+
+.order-image {
+    height: 27px;
+    vertical-align: middle;
 }

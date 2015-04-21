@@ -12,10 +12,9 @@
 						<img class="army-image" src="img/{{army.country}}.png" />
 						{{army.name}}
 					</div>
-					<button class="col-10 button button-balanced button-small icon ion-document" ng-click="add()"></button>
+					<button class="col-10 button button-balanced button-small icon ion-document" ng-click="add(army)"></button>
 					<div>&nbsp;</div>
-					<button class="col-10 button button-energized button-small icon ion-ios-lightbulb-outline" ng-click="initiative()"></button>
-					
+					<button class="col-10 button button-energized button-small icon ion-ios-lightbulb-outline" ng-click="initiative(army)"></button>
 				</div>					
 				<ion-list>
 					<ion-item ng-repeat="order in army.orders" ng-show="isArmyShown(army)">
@@ -24,11 +23,11 @@
 							<input class="col-20" type="text" readonly="readonly" value="{{order.receiver}}" />
 							<input class="col-35" type="text" readonly="readonly" value="{{order.dateTime | date:'MMM d, y h:mm a'}}" />
 							<small class="col-10 text-right"><input type="text" readonly="readonly" value="{{order.method}}" /></small>
-							<button class="col-10 button button-positive button-small icon ion-edit" ng-click="edit()"></button>
+							<button class="col-10 button button-positive button-small icon ion-edit" ng-click="edit(order)"></button>
 							<div>&nbsp;</div>
-							<button class="col-10 button button-assertive button-small icon ion-trash-a" ng-click="delete()"></button>
+							<button class="col-10 button button-assertive button-small icon ion-trash-a" ng-click="delete(order)"></button>
 							<div>&nbsp;</div>
-							<button class="col-10 button button-calm button-small icon ion-close-circled" ng-click="stop()"></button>
+							<button class="col-10 button button-calm button-small icon ion-close-circled" ng-click="stop(order)"></button>
 						</div>
 					</ion-item>	
 				</ion-list>

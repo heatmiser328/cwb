@@ -1,0 +1,42 @@
+<ion-modal-view>
+	<ion-header-bar class="bar bar-header bar-positive">
+		<div class="title">
+			<img class="order-image" src="img/{{order.country}}.png"/> 
+		</div>
+		<button class="button button-balanced button-large" ng-click="accept()">Ok</button>
+		<button class="button button-assertive button-large button-primary" ng-click="cancel()">Cancel</button>
+	</ion-header-bar>
+	<ion-content class="padding">
+		<div class="list">
+			<label class="item item-input item-select">
+				<span class="input-label">Status</span>
+			    <select ng-model="order.status" ng-options="d.desc for d in statuses" required></select>
+            </label>
+			<label class="item item-input item-select">
+				<span class="input-label">Sender</span>
+			    <select ng-model="order.sender" ng-options="l as l for l in superiorLeaders" required></select>
+            </label>
+			<label class="item item-input item-select">
+				<span class="input-label">Receiver</span>
+			    <select ng-model="order.receiver" ng-options="l as l for l in subordinateLeaders" required>
+					<option value="">Choose Recipient</option>
+				</select>
+            </label>
+			<label class="item item-input">
+				<span class="input-label">Arrival</span>
+				<input class="text-right" ng-model="order.dateTime" type="time">
+            </label>
+			<label class="item item-input item-select">
+				<span class="input-label">Type</span>
+			    <select ng-model="order.type" ng-options="t.desc for t in types" required></select>
+            </label>
+			<label class="item item-input item-select">
+				<span class="input-label">Method</span>
+			    <select ng-model="order.method" ng-options="m.desc for m in methods" required></select>
+            </label>
+			<label class="item item-input">
+				<textarea ng-model="order.text" placeholder="Enter orders" required></textarea>
+            </label>
+		</div>
+	</ion-content>
+</ion-modal-view>
