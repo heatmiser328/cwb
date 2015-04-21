@@ -27,7 +27,9 @@
 							<div>&nbsp;</div>
 							<button class="col-10 button button-assertive button-small icon ion-trash-a" ng-click="delete(order)"></button>
 							<div>&nbsp;</div>
-							<button class="col-10 button button-calm button-small icon ion-close-circled" ng-click="stop(order)"></button>
+							<button class="col-10 button button-balanced button-small icon ion-checkmark-circled" ng-show="order.status=='InTransit'" ng-click="accept(order)"></button>
+							<button class="col-10 button button-royal button-small icon ion-arrow-graph-down-right" ng-show="order.status=='Delay1' || order.status=='Delay2'" ng-click="reduce(order)"></button>
+							<button class="col-10 button button-calm button-small icon ion-close-circled" ng-show="order.status=='Accepted'" ng-click="stop(order)"></button>
 						</div>
 					</ion-item>	
 				</ion-list>

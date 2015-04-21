@@ -1,6 +1,6 @@
 angular.module('cwb.controllers')
 
-.controller('ScenarioOrdersCtrl', function($rootScope, $scope, $log, $ionicModal, Orders, Roster) {
+.controller('ScenarioOrdersCtrl', function($rootScope, $scope, $log, $ionicModal, $ionicPopup, Orders, Roster, Dice) {
 	$log.info('load scenario orders controller');
     
     /*
@@ -78,13 +78,55 @@ angular.module('cwb.controllers')
     	// present the acceptance modal
         $log.info('Accept order for ' + order.country + '/' + order.army);
 	}
+    $scope.reduce = function(order) {
+    	// present the reduction modal
+        $log.info('Reduce Order Delay for ' + order.country + '/' + order.army);
+        $scope.reduceOrigStatus = $scope.reduceStatus = Orders.getStatus(order.status);
+        $scope.reduceDie = 0;
+        function reduce() {
+            var dice = new Dice.Dice(1, 1, 6);
+            dice.roll();
+            dice.each(function(die, index) {
+            	$scope.reduceDie = die.getValue();
+            });
+            $scope.reduceStatus = Orders.delayReduction($scope.reduceDie, $scope.reduceOrigStatus.type);
+        }
+        reduce();
+        $ionicPopup.show({
+        	templateUrl: 'templates/order-delay-reduction.html',
+            title: 'Delay Reduction',
+            scope: $scope,
+            buttons: [
+            	{ text: 'Close' },
+                {
+                	text: '<b>Roll</b>',
+                    type: 'button-positive',
+                    onTap: function(e) {
+                    	e.preventDefault();
+                        reduce();
+					}
+				}
+			]
+		}).then(function(ok) {
+        	//if (ok) {
+            	// update the new status
+                $log.info('Setting status for Order to ' + $scope.reduceStatus.type);
+                $scope.reduceStatus = undefined;
+                $scope.reduceDie = undefined;
+                
+                order.status = $scope.reduceStatus.type;
+                $scope.save();
+            //}
+		});
+	}
+    
     $scope.stop = function(order) {
     	// present the stoppage modal
         $log.info('Stop order for ' + order.country + '/' + order.army);
 	}
     
     // order detail
-    $ionicModal.fromTemplateUrl('templates/scenario-tab-orders-order.html', {
+    $ionicModal.fromTemplateUrl('templates/order-detail.html', {
     	scope: $scope,
         animation: 'slide-in-up'
 	}).then(function(modal) {

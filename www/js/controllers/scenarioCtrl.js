@@ -3,6 +3,8 @@ angular.module('cwb.controllers')
 .controller('ScenarioCtrl', function($rootScope, $scope, $log, $stateParams, $ionicPopup, Battles, Current) {
 	$log.info('load scenario controller');
     
+    $scope.dieClasses = ["","one","two","three","four","five","six"];
+    
     $rootScope.$on('load', function(e, id) {
     	load(id);
     });

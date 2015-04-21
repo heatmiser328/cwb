@@ -116,6 +116,12 @@ angular.module('cwb.services')
                 statuses: [4,3,1,1,1,2,2,1,2,3,3]
             }
         ],
+		getAcceptance: function(acceptance) {
+        	return _.find(this.orderAcceptances, function(oa) {
+            	return acceptance <= oa.acceptance;
+            });
+		},
+        
 		
         stoppagePoints: [
         	{
@@ -205,10 +211,16 @@ angular.module('cwb.services')
 			return 12;
 		},
         
-		acceptance: function(acceptance) {
-        	return _.find(this.orderAcceptances, function(oa) {
-            	return acceptance <= oa.acceptance;
+        delayReduction: function(die, status) {
+        	var os = _.find(this.statuses, function(s) {
+            	return s.type == status;
             });
-		}
+            
+            if (os && die <= os.delayreduction) {
+            	return this.statuses[1];	// accepted
+            }
+            return os;	// original status
+        }
+        
 	};
 });
