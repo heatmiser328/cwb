@@ -73,6 +73,42 @@ angular.module('cwb.controllers')
     $scope.initiative = function(army) {
     	// present the initiative modal
         $log.info('Obtain initiative for ' + army.country + '/' + army.army);
+        $scope.init = {
+        	die1: 0,
+            die2: 0,
+        	status: '',
+            leader: 1,
+            anti: 0
+		};
+        
+        function initiative() {
+            var dice = new Dice.Dice(2, 1, 6);
+            dice.roll();
+            $scope.init.die1 = dice.getDie(1);
+            $scope.init.die2 = dice.getDie(2);
+            $scope.init.status = Orders.initiative($scope.init.die1 + $scope.init.die2, $scope.init.leader, $scope.init.anti);
+        }
+        $ionicPopup.show({
+        	templateUrl: 'templates/order-initiative.html',
+            title: 'Initiative',
+            scope: $scope,
+            buttons: [
+            	{ text: 'Close' },
+                {
+                	text: '<b>Roll</b>',
+                    type: 'button-positive',
+                    onTap: function(e) {
+                    	e.preventDefault();
+                        initiative();
+					}
+				}
+			]
+		}).then(function(ok) {
+        	//if (ok) {
+                delete $scope['init'];
+            //}
+		});
+        
 	}
     $scope.accept = function(order) {
     	// present the acceptance modal

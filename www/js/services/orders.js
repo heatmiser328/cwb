@@ -89,7 +89,30 @@ angular.module('cwb.services')
         }
     ];
     
-
+        
+	function getInitiative(init) {
+		if (init <= 0) {
+			return 12;
+		}
+		else if (init <= 2) {
+			return 11;
+		}
+		else if (init <= 3) {
+			return 10;
+		}
+		else if (init <= 4) {
+			return 9;
+		}
+		return 12;
+	}
+    
+	function getAcceptance(acceptance) {
+    	return _.find(acceptances, function(oa) {
+        	return acceptance <= oa.acceptance;
+        });
+	}
+        
+    
 	return {
         methods: [
 	        {
@@ -175,12 +198,6 @@ angular.module('cwb.services')
         	return _.find(this.statuses, function(s) {return s.type == status;});
         },
         
-		getAcceptance: function(acceptance) {
-        	return _.find(acceptances, function(oa) {
-            	return acceptance <= oa.acceptance;
-            });
-		},
-        
 		cost: function(order) {
         	var cost = 0;
             var method = _.find(this.methods, function(method) {
@@ -195,20 +212,18 @@ angular.module('cwb.services')
 			return cost;                   
 		},
         
-		initiative: function(init) {
-			if (init <= 0) {
-				return 12;
-			}
-			else if (init <= 2) {
-				return 11;
-			}
-			else if (init <= 3) {
-				return 10;
-			}
-			else if (init <= 4) {
-				return 9;
-			}
-			return 12;
+        
+		initiative: function(dice, initiative, antiinitiative) {
+			if (dice == 2) {
+				return "Loose Cannon";
+			}                
+			
+			var initpts = initiative - antiinitiative; 
+            var init = getInitiative(initpts);
+			if (dice >= init) {
+				return "Initiative";
+			}                
+			return "Indecision";
 		},
         
         accept: function(dice, sender, receiver, currentorders, method, type) {
@@ -221,7 +236,7 @@ angular.module('cwb.services')
         
         	var accept = sender + receiver + method.acceptance + type.acceptance + (currentorders ? -1 : 0);
             
-            var oa = this.getAcceptance(accept);
+            var oa = getAcceptance(accept);
 			
             // turn into an index
             dice -= 2;
