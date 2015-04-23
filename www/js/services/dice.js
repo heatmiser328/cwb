@@ -105,11 +105,4 @@ angular.module('cwb.services')
     
     return dice;
     
-})
-
-.factory('Sound', function() {
-	return {
-    	play: function() {
-        }
-    };
 });
