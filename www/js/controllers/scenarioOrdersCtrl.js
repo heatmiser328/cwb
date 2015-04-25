@@ -3,12 +3,6 @@ angular.module('cwb.controllers')
 .controller('ScenarioOrdersCtrl', function($rootScope, $scope, $log, $ionicModal, $ionicPopup, Orders, Roster, Dice) {
 	$log.info('load scenario orders controller');
     
-    /*
-    $scope.reset = function() {
-    	$rootScope.$emit('reset');
-    }
-    */
-    
     $scope.toggleArmy = function(army) {
     	if ($scope.isArmyShown(army)) {
         	$scope.shownArmy = null;

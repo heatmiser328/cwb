@@ -17,3 +17,51 @@
     height: 27px;
     vertical-align: middle;
 }
+
+/* -------------------------------------------
+		ROSTER
+----------------------------------------------  */
+.roster {
+    clear: both;
+    text-align: left;
+    width: 100%;
+}
+.rosterUnit {
+    width: 15%;
+}
+.rosterRoster {
+    width: 85%;
+}
+.rosterImage {
+    height: 1em;
+    width : 1em;
+    vertical-align: middle;
+}
+.rosterEntry {
+    /*display: block;*/
+    vertical-align: middle;
+    /*margin-left: 10px;*/
+}
+.rosterBrigade {
+    vertical-align: middle;
+    /*
+    overflow: auto;
+    width: 200px;
+    border: 2px solid;
+    border-color: green;
+    */
+}
+.rosterItem {
+    padding-right: 3%;
+}
+
+.rosterLeft {
+    width: 15%;
+    float: left;
+    display: inline;
+}
+.rosterRight {
+    width: 85%;
+    float: left;
+    display: inline;
+}

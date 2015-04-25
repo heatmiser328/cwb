@@ -63,7 +63,19 @@ angular.module('cwb', ['ionic', 'cwb.controllers', 'cwb.services', 'cwb.directiv
 		            controller: 'ScenarioOrdersCtrl'
                 }
             }
-		});
+		})
+        
+        .state('app.scenario.roster', {
+        	url: '/roster',
+            views: {
+            	'scenario-roster': {
+		            templateUrl: 'templates/scenario-tab-roster.html',
+		            controller: 'ScenarioRosterCtrl'
+                }
+            }
+		})
+        
+        ;
             
         // if none of the above states are matched, use this as the fallback
         $urlRouterProvider.otherwise('/app/home');

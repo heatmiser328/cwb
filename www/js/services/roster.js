@@ -72,13 +72,95 @@ angular.module('cwb.services')
 		});                
 	}
 
-
+    function isWrecked(item) {
+    	return (item.losses + item.stragglers) >= item.wreckLosses;
+    }
+    function isDestroyed(item) {
+    	return (item.losses + item.stragglers) >= item.totalStrength;
+    }
+    
+    
+    var fireLevels = [
+      {
+        level: "AAA",
+        strength: 26,
+        range: 5
+      },
+      {
+        level: "AAB",
+        strength: 21,
+        range: 5
+      },
+      {
+        level: "AA",
+        strength: 16,
+        range: 5
+      },
+      {
+        level: "AB",
+        strength: 11,
+        range: 5
+      },
+      {
+        level: "A",
+        strength: 6,
+        range: 5
+      },
+      {
+        level: "B",
+        strength: 3,
+        range: 3
+      },
+      {
+        level: "C",
+        strength: 0,
+        range: 3
+      }
+    ];
+    
+    function getFireLevel(strength) {
+    	return _.find(fireLevels, function(firelevel) {
+        	return strength > firelevel.strength;
+        });
+    }
+    function getFireLevelIndex(strength) {
+    	return _.findIndex(fireLevels, function(firelevel) {
+        	return strength > firelevel.strength;
+        });
+    }
+    
+    function getFireLevels(strength) {
+        var idx = getFireLevelIndex(strength);
+        return _.slice(fireLevels, idx);
+        /*
+        return _.map(_.slice(fireLevels, idx), function(fl) {
+        	return {
+            	level: fl.level,
+                range: fl.range
+            };
+        });
+        */
+    }
+    
     return {
     	getSuperiorLeaders: function(scenario, army) {
         	return getSuperiorLeadersForCountry(scenario, army);
         },
         getSubordinateLeaders: function(scenario, army) {
     		return getSubordinateLeadersForCountry(scenario, army);
+        },
+        isWrecked: function(item) {
+        	return isWrecked(item);
+        },
+        isDestroyed: function(item) {
+        	return isDestroyed(item);
+		},
+        getFireLevels: function(strength) {
+        	return getFireLevels(strength);
+        },
+        getFireLevel: function(strength) {
+        	return getFireLevel(strength);
         }
+        
     };
 });

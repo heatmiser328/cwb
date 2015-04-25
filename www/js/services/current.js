@@ -16,7 +16,8 @@ angular.module('cwb.services')
                 unionAmmo: scenario.unionAmmo,
                 unionCasualty: scenario.unionCasualty,
                 unionVP: 0,
-                orders: angular.copy(scenario.defaultOrders)
+                orders: angular.copy(scenario.defaultOrders),
+                armies: angular.copy(scenario.armies)
             };
         },
     	load: function() {

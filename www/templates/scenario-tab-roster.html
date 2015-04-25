@@ -1,0 +1,184 @@
+<ion-view view-title="{{scenario.battle.title}} - {{scenario.title}}" class="bubble-background">
+	<ion-nav-buttons side="right">
+      <button class="button button-large icon ion-android-refresh" ng-click="reset()">
+      </button>
+	</ion-nav-buttons>
+	<ion-content padding="true">
+		<ion-list>
+			<ion-item ng-repeat="army in current.armies" ng-class="{active: isArmyShown(army)}">
+				<div class="row">
+					<div class="col-25" ng-click="toggleArmy(army)">
+						<i class="icon" ng-class="isArmyShown(army) ? 'ion-minus' : 'ion-plus'"></i>
+						<img class="army-image" src="img/{{army.country}}.png" />
+						<b>{{army.name}}</b>
+						<i>{{army.commander}}</i>
+					</div>
+				</div>					
+				<div>
+					<ion-list>
+						<ion-item ng-repeat="corps in army.roster.corps" ng-show="isArmyShown(army)">
+							<div class="row">
+								<div class="col-25" ng-click="toggleCorps(corps)">
+									<i class="icon" ng-class="isCorpsShown(corps) ? 'ion-minus' : 'ion-plus'"></i>
+									<img class="army-image" src="img/corps.png" />
+									<b>{{corps.name}}</b>
+									<i>{{corps.commander}}</i>
+								</div>
+								<div>
+									<ion-list>
+										<ion-item ng-repeat="division in corps.divisions" ng-show="isCorpsShown(corps)">
+											<div class="row">
+												<div class="col-25" ng-click="toggleDivision(division)">
+													<i class="icon" ng-class="isDivisionShown(division) ? 'ion-minus' : 'ion-plus'"></i>
+													<img class="army-image" src="img/division.png" />
+													<b>{{division.name}}</b>
+													<i>{{division.commander}}</i>
+												</div>
+												<div class="col-75">
+													<ion-list>
+														<ion-item class="row" ng-repeat="brigade in division.brigades" ng-show="isDivisionShown(division)">
+															<div class="col-34">
+																<img class="army-image" ng-show="!isBrigadeWrecked(brigade)&&!isBrigadeDestroyed(brigade)" src="img/brigade.png" />
+																<img class="army-image" ng-show="isBrigadeWrecked(brigade)&&!isBrigadeDestroyed(brigade)" src="img/brigade-wrecked.png" />
+																<img class="army-image" ng-show="isBrigadeDestroyed(brigade)" src="img/brigade-destroyed.png" />
+																<b>{{brigade.name}}</b>
+																<i>{{brigade.commander}}</i>
+															</div>
+															<div class="col-66 rosterBrigade">
+																<div class="row responsive-sm">
+																	<i class="col-10 text-right">{{brigade.moraleLevel}}</i>
+																	<b class="col-20 text-center">{{brigadeFireLevel(brigade)}}</b>
+																	<i class="col-33">
+																		<div class="row text-center rosterEntry">
+																			<img class="col-20 rosterImage" src="img/skull.gif"></img>
+																			<button class="col-25 button button-small button-positive ion-chevron-up" ng-click="adjustLosses(brigade, 1)"></button>
+																			<i class="col-25 text-center">{{brigade.losses}}</i>
+																			<button class="col-25 button button-small button-positive ion-chevron-down" ng-click="adjustLosses(brigade, -1)"></button>
+																		</div>
+																	</i>
+																	<i class="col-33">
+																		<div class="row text-center rosterEntry">
+																			<i class="col-20 fa fa-ambulance"></i>
+																			<button class="col-25 button button-small button-positive ion-chevron-up" ng-click="adjustStragglers(brigade, 1)"></button>
+																			<i class="col-25">{{brigade.stragglers}}</i>
+																			<button class="col-25 button button-small button-positive ion-chevron-down" ng-click="adjustStragglers(brigade, -1)"></button>
+																		</div>
+																	</i>
+																	<i class="col-5 text-right">
+																		({{brigade.wreckLosses - (brigade.losses + brigade.stragglers)}})
+																	</i>
+																</div>
+															</div>
+														</ion-item>	
+													</ion-list>
+												</div>					
+											</div>
+										</ion-item>	
+									</ion-list>
+								</div>					
+							</div>
+						</ion-item>	
+					</ion-list>
+				</div>					
+				<div>
+					<ion-list>
+						<ion-item ng-repeat="division in army.roster.divisions" ng-show="isArmyShown(army)">
+							<div class="row">
+								<div class="col-25" ng-click="toggleDivision(division)">
+									<i class="icon" ng-class="isDivisionShown(division) ? 'ion-minus' : 'ion-plus'"></i>
+									<img class="army-image" ng-show="!isDivisionWrecked(division)" src="img/division.png" />
+									<img class="army-image" ng-show="isDivisionWrecked(division)" src="img/division-wrecked.png" />
+									<b>{{division.name}}</b>
+									<i>{{division.commander}}</i>
+								</div>
+								<div class="col-50 text-right">
+									<i class="rosterItem icon" ng-repeat="b in range(division.brigades)" ng-class="divisionItemClass(division, $index)"></i>
+								</div>
+							</div>
+							<div>
+								<ion-list>
+									<ion-item class="row" ng-repeat="brigade in division.brigades" ng-show="isDivisionShown(division)">
+										<div class="col-34">
+											<img class="army-image" ng-show="!isBrigadeWrecked(brigade)&&!isBrigadeDestroyed(brigade)" src="img/brigade.png" />
+											<img class="army-image" ng-show="isBrigadeWrecked(brigade)&&!isBrigadeDestroyed(brigade)" src="img/brigade-wrecked.png" />
+											<img class="army-image" ng-show="isBrigadeDestroyed(brigade)" src="img/brigade-destroyed.png" />
+											<b>{{brigade.name}}</b>
+											<i>{{brigade.commander}}</i>
+										</div>
+										<div class="col-66 rosterBrigade">
+											<div class="row responsive-sm">
+												<i class="col-10 text-right">{{brigade.moraleLevel}}</i>
+												<b class="col-20 text-center">{{brigadeFireLevel(brigade)}}</b>
+												<i class="col-33">
+													<div class="row text-center rosterEntry">
+														<img class="col-20 rosterImage" src="img/skull.gif"></img>
+														<button class="col-25 button button-small button-positive ion-chevron-up" ng-click="adjustLosses(brigade, 1)"></button>
+														<i class="col-25 text-center">{{brigade.losses}}</i>
+														<button class="col-25 button button-small button-positive ion-chevron-down" ng-click="adjustLosses(brigade, -1)"></button>
+													</div>
+												</i>
+												<i class="col-33">
+													<div class="row text-center rosterEntry">
+														<i class="col-20 fa fa-ambulance"></i>
+														<button class="col-25 button button-small button-positive ion-chevron-up" ng-click="adjustStragglers(brigade, 1)"></button>
+														<i class="col-25">{{brigade.stragglers}}</i>
+														<button class="col-25 button button-small button-positive ion-chevron-down" ng-click="adjustStragglers(brigade, -1)"></button>
+													</div>
+												</i>
+												<i class="col-5 text-right">
+													({{brigade.wreckLosses - (brigade.losses + brigade.stragglers)}})
+												</i>
+											</div>
+										</div>
+									</ion-item>	
+								</ion-list>
+							</div>					
+							
+						</ion-item>	
+					</ion-list>
+				</div>					
+				
+				<div>
+					<ion-list>
+						<ion-item class="row" ng-repeat="brigade in army.roster.independents" ng-show="isArmyShown(army)">
+							<div class="col-34">
+								<img class="army-image" ng-show="!isBrigadeWrecked(brigade)&&!isBrigadeDestroyed(brigade)" src="img/brigade.png" />
+								<img class="army-image" ng-show="isBrigadeWrecked(brigade)&&!isBrigadeDestroyed(brigade)" src="img/brigade-wrecked.png" />
+								<img class="army-image" ng-show="isBrigadeDestroyed(brigade)" src="img/brigade-destroyed.png" />
+								<b>{{brigade.name}}</b>
+								<i>{{brigade.commander}}</i>
+							</div>
+							<div class="col-66 rosterBrigade">
+								<div class="row responsive-sm">
+									<i class="col-10 text-right">{{brigade.moraleLevel}}</i>
+									<b class="col-20 text-center">{{brigadeFireLevel(brigade)}}</b>
+									<i class="col-33">
+										<div class="row text-center rosterEntry">
+											<img class="col-20 rosterImage" src="img/skull.gif"></img>
+											<button class="col-25 button button-small button-positive ion-chevron-up" ng-click="adjustLosses(brigade, 1)"></button>
+											<i class="col-25 text-center">{{brigade.losses}}</i>
+											<button class="col-25 button button-small button-positive ion-chevron-down" ng-click="adjustLosses(brigade, -1)"></button>
+										</div>
+									</i>
+									<i class="col-33">
+										<div class="row text-center rosterEntry">
+											<i class="col-20 fa fa-ambulance"></i>
+											<button class="col-25 button button-small button-positive ion-chevron-up" ng-click="adjustStragglers(brigade, 1)"></button>
+											<i class="col-25">{{brigade.stragglers}}</i>
+											<button class="col-25 button button-small button-positive ion-chevron-down" ng-click="adjustStragglers(brigade, -1)"></button>
+										</div>
+									</i>
+									<i class="col-5 text-right">
+										({{brigade.wreckLosses - (brigade.losses + brigade.stragglers)}})
+									</i>
+								</div>
+							</div>
+						</ion-item>	
+					</ion-list>
+				</div>					
+				
+			</ion-item>		 
+		</ion-list>
+	</ion-content>
+	
+</ion-view>
