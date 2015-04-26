@@ -1,0 +1,19 @@
+<div class="row">
+	<div class="col-25" ng-click="toggleDivision(division)">
+		<i class="icon" ng-class="isDivisionShown(division) ? 'ion-minus' : 'ion-plus'"></i>
+		<img class="army-image" ng-show="!isDivisionWrecked(division)" src="img/{{country}}-division.png" />
+		<img class="army-image" ng-show="isDivisionWrecked(division)" src="img/{{country}}-division-wrecked.png" />
+		<b>{{division.name}}</b>
+		<i>{{division.commander}}</i>
+	</div>
+	<div class="col-50 text-right">
+		<i class="rosterItem icon" ng-repeat="b in range(division.brigades)" ng-class="divisionItemClass(division, $index)"></i>
+	</div>
+</div>
+<div>
+	<ion-list>
+		<ion-item ng-repeat="brigade in division.brigades" ng-show="isDivisionShown(division)">
+			<brigade ng-model="brigade" country="country"></brigade>
+		</ion-item>
+	</ion-list>
+</div>

@@ -1,0 +1,40 @@
+<div class="row">
+	<div class="col-34">
+		<img class="army-image" ng-show="!isBrigadeWrecked(brigade)&&!isBrigadeDestroyed(brigade)" src="img/{{country}}-brigade.png" />
+		<img class="army-image" ng-show="isBrigadeWrecked(brigade)&&!isBrigadeDestroyed(brigade)" src="img/{{country}}-brigade-wrecked.png" />
+		<img class="army-image" ng-show="isBrigadeDestroyed(brigade)" src="img/{{country}}-brigade-destroyed.png" />
+		<b>{{brigade.name}}</b>
+		<i>{{brigade.commander}}</i>
+		<i>{{brigade.moraleLevel}}</i>
+	</div>
+	<div class="col-66 rosterBrigade">
+		<i class="rosterEntry" ng-repeat="fl in brigadeFireLevels(brigade)">
+			<b>{{fl.level}}</b>
+			<i class="icon rosterItem" ng-repeat="i in range(fl.range)" ng-class="brigadeItemClass(brigade, i)"></i>
+		</i>
+	</div>
+	<!--
+    
+    $scope.brigadeFireLevels = function(brigade) {
+    	return Roster.getFireLevels(brigade.totalStrength);
+    }    
+    
+    
+    $scope.brigadeItemClass = function(brigade, i) {
+    	if (i == 0) {
+        	return '';
+        }
+    
+        if (i == brigade.wreckLosses) {
+        	return 'ion-android-done';
+        }
+    
+    	var wrecked = Roster.getWrecked(brigade.brigades);
+        if (wrecked > 0 && i<wrecked) {
+        	return 'ion-android-checkbox';
+        }
+        return 'ion-android-checkbox-outline-blank';
+    }    
+	-->
+</div>
+

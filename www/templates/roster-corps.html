@@ -1,0 +1,15 @@
+<div class="row">
+	<div class="col-25" ng-click="toggleCorps(corps)">
+		<i class="icon" ng-class="isCorpsShown(corps) ? 'ion-minus' : 'ion-plus'"></i>
+		<img class="army-image" src="img/{{country}}-corps.png" />
+		<b>{{corps.name}}</b>
+		<i>{{corps.commander}}</i>
+	</div>
+	<div class="col-75">
+		<ion-list>
+			<ion-item ng-repeat="division in corps.divisions" ng-show="isCorpsShown(corps)">
+				<division ng-model="division" country="country"></division>
+			</ion-item>
+		</ion-list>
+	</div>
+</div>

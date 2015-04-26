@@ -1,0 +1,31 @@
+<div class="row">
+	<div class="col-25" ng-click="toggleArmy(army)">
+		<i class="icon" ng-class="isArmyShown(army) ? 'ion-minus' : 'ion-plus'"></i>
+		<img class="army-image" src="img/{{army.country}}.png" />
+		<b>{{army.name}}</b>
+		<i>{{army.commander}}</i>
+	</div>
+</div>					
+<div>
+	<ion-list>
+		<ion-item ng-repeat="corps in army.roster.corps" ng-show="isArmyShown(army)">
+			<corps ng-model="corps" country="army.country"></corps>
+		</ion-item>	
+	</ion-list>
+</div>
+<div>
+	<ion-list>
+		<ion-item ng-repeat="division in army.roster.divisions" ng-show="isArmyShown(army)">
+			<division ng-model="division" country="army.country"></division>
+		</ion-item>	
+	</ion-list>
+</div>
+<div>
+	<ion-list>
+		<ion-item ng-repeat="brigade in army.roster.independents" ng-show="isArmyShown(army)">
+			<brigade ng-model="brigade" country="army.country"></brigade>
+		</ion-item>	
+	</ion-list>
+</div>
+
+
