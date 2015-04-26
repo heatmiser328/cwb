@@ -20,7 +20,7 @@
 							<div class="row">
 								<div class="col-25" ng-click="toggleCorps(corps)">
 									<i class="icon" ng-class="isCorpsShown(corps) ? 'ion-minus' : 'ion-plus'"></i>
-									<img class="army-image" src="img/corps.png" />
+									<img class="army-image" src="img/{{army.country}}-corps.png" />
 									<b>{{corps.name}}</b>
 									<i>{{corps.commander}}</i>
 								</div>
@@ -30,7 +30,8 @@
 											<div class="row">
 												<div class="col-25" ng-click="toggleDivision(division)">
 													<i class="icon" ng-class="isDivisionShown(division) ? 'ion-minus' : 'ion-plus'"></i>
-													<img class="army-image" src="img/division.png" />
+													<img class="army-image" ng-show="!isDivisionWrecked(division)" src="img/{{army.country}}-division.png" />
+													<img class="army-image" ng-show="isDivisionWrecked(division)" src="img/{{army.country}}-division-wrecked.png" />
 													<b>{{division.name}}</b>
 													<i>{{division.commander}}</i>
 												</div>
@@ -38,8 +39,8 @@
 													<ion-list>
 														<ion-item class="row" ng-repeat="brigade in division.brigades" ng-show="isDivisionShown(division)">
 															<div class="col-34">
-																<img class="army-image" ng-show="!isBrigadeWrecked(brigade)&&!isBrigadeDestroyed(brigade)" src="img/brigade.png" />
-																<img class="army-image" ng-show="isBrigadeWrecked(brigade)&&!isBrigadeDestroyed(brigade)" src="img/brigade-wrecked.png" />
+																<img class="army-image" ng-show="!isBrigadeWrecked(brigade)&&!isBrigadeDestroyed(brigade)" src="img/{{army.country}}-brigade.png" />
+																<img class="army-image" ng-show="isBrigadeWrecked(brigade)&&!isBrigadeDestroyed(brigade)" src="img/{{army.country}}-brigade-wrecked.png" />
 																<img class="army-image" ng-show="isBrigadeDestroyed(brigade)" src="img/brigade-destroyed.png" />
 																<b>{{brigade.name}}</b>
 																<i>{{brigade.commander}}</i>
@@ -86,8 +87,8 @@
 							<div class="row">
 								<div class="col-25" ng-click="toggleDivision(division)">
 									<i class="icon" ng-class="isDivisionShown(division) ? 'ion-minus' : 'ion-plus'"></i>
-									<img class="army-image" ng-show="!isDivisionWrecked(division)" src="img/division.png" />
-									<img class="army-image" ng-show="isDivisionWrecked(division)" src="img/division-wrecked.png" />
+									<img class="army-image" ng-show="!isDivisionWrecked(division)" src="img/{{army.country}}-division.png" />
+									<img class="army-image" ng-show="isDivisionWrecked(division)" src="img/{{army.country}}-division-wrecked.png" />
 									<b>{{division.name}}</b>
 									<i>{{division.commander}}</i>
 								</div>
@@ -99,9 +100,9 @@
 								<ion-list>
 									<ion-item class="row" ng-repeat="brigade in division.brigades" ng-show="isDivisionShown(division)">
 										<div class="col-34">
-											<img class="army-image" ng-show="!isBrigadeWrecked(brigade)&&!isBrigadeDestroyed(brigade)" src="img/brigade.png" />
-											<img class="army-image" ng-show="isBrigadeWrecked(brigade)&&!isBrigadeDestroyed(brigade)" src="img/brigade-wrecked.png" />
-											<img class="army-image" ng-show="isBrigadeDestroyed(brigade)" src="img/brigade-destroyed.png" />
+											<img class="army-image" ng-show="!isBrigadeWrecked(brigade)&&!isBrigadeDestroyed(brigade)" src="img/{{army.country}}-brigade.png" />
+											<img class="army-image" ng-show="isBrigadeWrecked(brigade)&&!isBrigadeDestroyed(brigade)" src="img/{{army.country}}-brigade-wrecked.png" />
+											<img class="army-image" ng-show="isBrigadeDestroyed(brigade)" src="img/{{army.country}}-brigade-destroyed.png" />
 											<b>{{brigade.name}}</b>
 											<i>{{brigade.commander}}</i>
 										</div>
@@ -142,9 +143,9 @@
 					<ion-list>
 						<ion-item class="row" ng-repeat="brigade in army.roster.independents" ng-show="isArmyShown(army)">
 							<div class="col-34">
-								<img class="army-image" ng-show="!isBrigadeWrecked(brigade)&&!isBrigadeDestroyed(brigade)" src="img/brigade.png" />
-								<img class="army-image" ng-show="isBrigadeWrecked(brigade)&&!isBrigadeDestroyed(brigade)" src="img/brigade-wrecked.png" />
-								<img class="army-image" ng-show="isBrigadeDestroyed(brigade)" src="img/brigade-destroyed.png" />
+								<img class="army-image" ng-show="!isBrigadeWrecked(brigade)&&!isBrigadeDestroyed(brigade)" src="img/{{army.country}}-brigade.png" />
+								<img class="army-image" ng-show="isBrigadeWrecked(brigade)&&!isBrigadeDestroyed(brigade)" src="img/{{army.country}}-brigade-wrecked.png" />
+								<img class="army-image" ng-show="isBrigadeDestroyed(brigade)" src="img/{{army.country}}-brigade-destroyed.png" />
 								<b>{{brigade.name}}</b>
 								<i>{{brigade.commander}}</i>
 							</div>
