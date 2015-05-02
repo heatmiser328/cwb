@@ -1,6 +1,6 @@
 <div class="row">
 	<div class="col-25" ng-click="toggleDivision(division)">
-		<i class="icon" ng-class="isDivisionShown(division) ? 'ion-minus' : 'ion-plus'"></i>
+		<i class="icon" ng-class="isDivisionShown(division) ? 'ion-arrow-down-b' : 'ion-arrow-right-b'"></i>
 		<img class="army-image" ng-show="!isDivisionWrecked(division)" src="img/{{country}}-division.png" />
 		<img class="army-image" ng-show="isDivisionWrecked(division)" src="img/{{country}}-division-wrecked.png" />
 		<b>{{division.name}}</b>

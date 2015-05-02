@@ -22,7 +22,7 @@
 		<ion-item ng-repeat="battle in battles" 
 			ng-click="toggleBattle(battle)" ng-class="{active: isBattleShown(battle)}">
 			<ion-list>
-				<i class="icon" ng-class="isBattleShown(battle) ? 'ion-minus' : 'ion-plus'"></i>
+				<i class="icon" ng-class="isBattleShown(battle) ? 'ion-arrow-down-b' : 'ion-arrow-right-b'"></i>
 				<img class="battle-image" src="img/{{battle.img}}" />
 				{{battle.title}}
 				<ion-item nav-clear menu-close ng-repeat="scenario in battle.scenarios" href="#/app/scenario/{{scenario.id}}/turn"

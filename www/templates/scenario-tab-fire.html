@@ -1,0 +1,156 @@
+<ion-view view-title="{{scenario.battle.title}} - {{scenario.title}}" class="bubble-background">
+	<ion-nav-buttons side="right">
+      <button class="button button-large icon ion-android-refresh" ng-click="reset()">
+      </button>
+	</ion-nav-buttons>
+	<ion-content padding="true">
+		<ion-list>
+			<ion-item class="card">
+				<div class="item item-divider row"> <!--ng-click="toggleItem('results')"-->
+					<!--i class="icon col" ng-class="isItemShown('results') ? 'ion-arrow-down-b' : 'ion-arrow-right-b'"></i-->
+					<div class="col">
+						<button class="button button-small button-assertive" ng-click="onRoll()">
+							<img class="button-roll" src="img/dice/droll.png"></img>
+						</button>
+					</div>
+					<div class="col col-80">
+						<img class="dice-image" src="img/dice/red{{fireDie1}}.png" ng-click="onDie('fireDie1')"></img>
+						<img class="dice-image" src="img/dice/red{{fireDie2}}.png" ng-click="onDie('fireDie2')"></img>
+						
+						<img class="dice-image" src="img/dice/yellow{{roundDie}}.png" ng-click="onDie('roundDie')"></img>
+						<img class="dice-image" src="img/dice/green{{stragglerDie}}.png" ng-click="onDie('stragglerDie')"></img>
+						
+						<img class="dice-image" src="img/dice/blackr{{moraleDie1}}.png" ng-click="onDie('moraleDie1')"></img>
+						<img class="dice-image" src="img/dice/blackw{{moraleDie2}}.png" ng-click="onDie('moraleDie2')"></img>
+						
+						<img class="dice-image" src="img/dice/blue{{ldrlossDie1}}.png" ng-click="onDie('ldrlossDie1')"></img>
+						<img class="dice-image" src="img/dice/white{{ldrlossDie2}}.png" ng-click="onDie('ldrlossDie2')"></img>
+					</div>
+				</div>
+				<div class="item" ng-show="isItemShown('results')">
+					<div class="row">
+						<span class="item-label col col-20">Casualty</span>
+						<input class="col col-10" type="text" ng-model="results.casualty" readonly />
+						<span class="input-label col col-20">Morale</span>
+					    <input class="item item-input col col-50" type="text" ng-model="results.morale" readonly />
+					</div>
+					<div class="row">
+						<span class="item-label col col-20">Stragglers</span>
+						<input class="col col-10" type="text" ng-model="results.stragglers" readonly />
+						<div class="col col-67">
+							<div class="row">
+								<label class="col col-33 text-left" ng-show="results.lowammo">
+									<img class="rosterImage" src="img/cwb.png"></img>
+									<small>Low Ammo</small>
+					            </label>
+								<label class="col col-67 text-left" ng-show="results.leaderloss">
+									<i class="fa fa-ambulance"></i>
+									<small>Ldr Loss</small>
+					            </label>
+							
+							</div>
+						</div>
+						<!--
+						<label class="col col-33 text-center" ng-show="results.lowammo">
+							<img class="rosterImage" src="img/cwb.png"></img>
+							<small>Low Ammo</small>
+			            </label>
+						<label class="col col-33 text-left" ng-show="results.leaderloss">
+							<i class="fa fa-ambulance"></i>
+							<small>Ldr Loss</small>
+			            </label>
+						-->
+					</div>
+					
+				</div>
+				
+			</ion-item>
+		
+			<ion-item class="card">
+				<div class="item item-divider row" ng-click="toggleItem('attacker')">
+					<i class="icon col" ng-class="isItemShown('attacker') ? 'ion-arrow-down-b' : 'ion-arrow-right-b'"></i>
+					<b class="col col-90">Attacker</b>
+					<i class="col"></i>
+				</div>
+				<div class="item" ng-show="isItemShown('attacker')">
+					<label class="item item-input item-select">
+						<span class="input-label">Points</span>
+					    <select ng-model="attack.points" ng-options="f.code for f in firepts" required></select>
+		            </label>
+					<div class="card">
+						<ion-checkbox ng-model="attack.upslope">Up Slope</ion-checkbox>
+						<ion-checkbox ng-model="attack.lowammo">Low Ammo</ion-checkbox>
+						<ion-checkbox ng-model="attack.dg">DG</ion-checkbox>
+						<ion-checkbox ng-model="attack.ccflank">CC Flank</ion-checkbox>
+						<ion-checkbox ng-model="attack.swamp">Swamp</ion-checkbox>
+						<ion-checkbox ng-model="attack.night">Night</ion-checkbox>
+					</div>
+				</div>
+				
+			</ion-item>
+			
+			<ion-item class="card">
+				<div class="item item-divider row"  ng-click="toggleItem('defender')">
+					<i class="icon col" ng-class="isItemShown('defender') ? 'ion-arrow-down-b' : 'ion-arrow-right-b'"></i>
+					<b class="col col-90">Defender</b>
+					<i class="col"></i>
+				</div>
+				
+				<div class="item" ng-show="isItemShown('defender')">
+					<label class="item item-input item-select">
+						<span class="input-label">Level</span>
+					    <select ng-model="defend.level" ng-options="m as m for m in moralelevels" required></select>
+		            </label>
+					<label class="item item-input item-select">
+						<span class="input-label">State</span>
+					    <select ng-model="defend.state" ng-options="m.desc for m in moralestates" required></select>
+		            </label>
+					<label class="item item-input">
+						<span class="input-label">Leader</span>
+						<input type="number" class="text-center" ng-model="defend.leader" min="-1" max="5"></input>
+				    </label>
+					<div class="card">
+						<ion-checkbox ng-model="defend.lowammo">Low Ammo</ion-checkbox>
+						<ion-checkbox ng-model="defend.column">Col/Limb/Flank</ion-checkbox>
+						<ion-checkbox ng-model="defend.arty">w/Unlimb Arty</ion-checkbox>
+						<ion-checkbox ng-model="defend.wrkbgd">Wrecked Bde</ion-checkbox>
+						<ion-checkbox ng-model="defend.wrkdiv">Wrecked Div</ion-checkbox>
+						<ion-checkbox ng-model="defend.trench">Low Ammo</ion-checkbox>
+						<ion-checkbox ng-model="defend.mounted">Mounted</ion-checkbox>
+						<ion-checkbox ng-model="defend.ccattacker">CC Attacker</ion-checkbox>
+						<ion-checkbox ng-model="defend.ccattackersp">CC Attacker Special</ion-checkbox>
+						<ion-checkbox ng-model="defend.ccdefender">CC Defender</ion-checkbox>
+					</div>
+				</div>
+				
+			</ion-item>
+			
+			<ion-item class="card">
+				<div class="item item-divider row"  ng-click="toggleItem('ammo')">
+					<i class="icon col" ng-class="isItemShown('ammo') ? 'ion-arrow-down-b' : 'ion-arrow-right-b'"></i>
+					<b class="col col-90">Artillery Ammo</b>
+					<i class="col"></i>
+				</div>
+				
+				<div class="item" ng-show="isItemShown('ammo')">
+					<label class="row item item-input">
+						<span class="col-10 input-label">USA</span>
+						<div class="col-20">&nbsp;</div>
+						<button class="col-10 button button-small button-positive ion-chevron-up" ng-click="adjustUsaAmmo(1)"></button>
+						<i class="col-50 text-center">{{current.unionAmmo}}</i>
+						<button class="col-10 button button-small button-positive ion-chevron-down" ng-click="adjustUsaAmmo(-1)"></button>
+					</label>
+					<label class="row item item-input">
+						<span class="col-10 input-label">CSA</span>
+						<div class="col-20">&nbsp;</div>
+						<button class="col-10 button button-small button-positive ion-chevron-up" ng-click="adjustCsaAmmo(1)"></button>
+						<i class="col-50 text-center">{{current.confederateAmmo}}</i>
+						<button class="col-10 button button-small button-positive ion-chevron-down" ng-click="adjustCsaAmmo(-1)"></button>
+					</label>
+				</div>
+			</ion-item>
+			
+		</ion-list>
+	</ion-content>
+	
+</ion-view>

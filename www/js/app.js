@@ -74,7 +74,17 @@ angular.module('cwb', ['ionic', 'cwb.controllers', 'cwb.services', 'cwb.directiv
                 }
             }
 		})
-        
+
+        .state('app.scenario.fire', {
+            url: '/fire',
+            views: {
+                'scenario-fire': {
+                    templateUrl: 'templates/scenario-tab-fire.html',
+                    controller: 'ScenarioFireCtrl'
+                }
+            }
+        })
+
         ;
             
         // if none of the above states are matched, use this as the fallback

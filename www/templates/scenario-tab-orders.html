@@ -8,7 +8,7 @@
 			<ion-item ng-repeat="army in current.orders" ng-class="{active: isArmyShown(army)}">
 				<div class="row">
 					<div class="col-25" ng-click="toggleArmy(army)">
-						<i class="icon" ng-class="isArmyShown(army) ? 'ion-minus' : 'ion-plus'"></i>
+						<i class="icon" ng-class="isArmyShown(army) ? 'ion-arrow-down-b' : 'ion-arrow-right-b'"></i>
 						<img class="army-image" src="img/{{army.country}}.png" />
 						{{army.army}}
 					</div>

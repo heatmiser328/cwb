@@ -18,6 +18,16 @@
     vertical-align: middle;
 }
 
+.button-roll {
+    vertical-align: middle;
+    height: 37px;
+}
+
+.dice-image {
+    vertical-align: middle;
+    height: 37px;
+}
+
 /* -------------------------------------------
 		ROSTER
 ----------------------------------------------  */
