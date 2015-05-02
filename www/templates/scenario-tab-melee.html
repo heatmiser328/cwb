@@ -1,0 +1,82 @@
+<ion-view view-title="{{scenario.battle.title}} - {{scenario.title}}" class="bubble-background">
+	<ion-nav-buttons side="right">
+      <button class="button button-large icon ion-android-refresh" ng-click="reset()">
+      </button>
+	</ion-nav-buttons>
+	<ion-content padding="true">
+		<ion-list>
+			<ion-item class="card">
+				<div class="item item-divider row"> <!--ng-click="toggleItem('results')"-->
+					<!--i class="icon col" ng-class="isItemShown('results') ? 'ion-arrow-down-b' : 'ion-arrow-right-b'"></i-->
+					<div class="col">
+						<button class="button button-small button-assertive" ng-click="onRoll()">
+							<img class="button-roll" src="img/dice/droll.png"></img>
+						</button>
+					</div>
+					<div class="col col-80">
+						<img class="dice-image" src="img/dice/red{{meleeDie}}.png" ng-click="onDie(1)"></img>
+						<img class="dice-image" src="img/dice/green{{tieBreakerDie}}.png" ng-click="onDie(2)"></img>
+					</div>
+				</div>
+				<div class="item" ng-show="isItemShown('results')">
+					<div class="row">
+						<span class="item-label col col-20">Odds</span>
+						<input class="col col-30" type="text" ng-model="odds" readonly />
+					
+						<span class="item-label col col-20">Results</span>
+						<input class="col col-30" type="text" ng-model="results" readonly />
+					</div>
+				</div>
+				
+			</ion-item>
+		
+			<ion-item class="card">
+				<div class="item item-divider row" ng-click="toggleItem('attacker')">
+					<i class="icon col" ng-class="isItemShown('attacker') ? 'ion-arrow-down-b' : 'ion-arrow-right-b'"></i>
+					<b class="col col-90">Attacker</b>
+					<i class="col"></i>
+				</div>
+				<div class="item" ng-show="isItemShown('attacker')">
+					<div class="row">
+						<ion-radio class="col" ng-model="attack.level" ng-value="'AA'" ng-change="onChange()">AA</ion-radio>
+						<ion-radio class="col" ng-model="attack.level" ng-value="'AB'" ng-change="onChange()">AB</ion-radio>
+						<ion-radio class="col" ng-model="attack.level" ng-value="'A'" ng-change="onChange()">A</ion-radio>
+						<ion-radio class="col" ng-model="attack.level" ng-value="'B'" ng-change="onChange()">B</ion-radio>
+						<ion-radio class="col" ng-model="attack.level" ng-value="'C'" ng-change="onChange()">C</ion-radio>
+						<ion-radio class="col" ng-model="attack.level" ng-value="'Arty'" ng-change="onChange()">Arty</ion-radio>
+					</div>
+					<div class="card">
+						<ion-checkbox ng-model="attack.wreckbde" ng-change="onChange()">Wrk Bde</ion-checkbox>
+					</div>
+				</div>
+				
+			</ion-item>
+			
+			<ion-item class="card">
+				<div class="item item-divider row"  ng-click="toggleItem('defender')">
+					<i class="icon col" ng-class="isItemShown('defender') ? 'ion-arrow-down-b' : 'ion-arrow-right-b'"></i>
+					<b class="col col-90">Defender</b>
+					<i class="col"></i>
+				</div>
+				
+				<div class="item" ng-show="isItemShown('defender')">
+					<div class="row">
+						<ion-checkbox class="col text-right" ng-model="defend.aa" ng-change="onChange()">AA</ion-checkbox>
+						<ion-checkbox class="col text-right" ng-model="defend.ab" ng-change="onChange()">AB</ion-checkbox>
+						<ion-checkbox class="col text-right" ng-model="defend.a" ng-change="onChange()">A</ion-checkbox>
+						<ion-checkbox class="col text-right" ng-model="defend.b" ng-change="onChange()">B</ion-checkbox>
+						<ion-checkbox class="col text-right" ng-model="defend.c" ng-change="onChange()">C</ion-checkbox>
+						<ion-checkbox class="col text-right" ng-model="defend.arty" ng-change="onChange()">Arty</ion-checkbox>
+					</div>
+					<div class="card">
+						<ion-checkbox ng-model="defend.trench" ng-change="onChange()">Trench</ion-checkbox>
+						<ion-checkbox ng-model="defend.wrkbgd" ng-change="onChange()">Wrecked Bde</ion-checkbox>
+						<ion-checkbox ng-model="defend.wrkdiv" ng-change="onChange()">Wrecked Div</ion-checkbox>
+					</div>
+				</div>
+			</ion-item>
+			
+		</ion-list>
+	</ion-content>
+	
+</ion-view>

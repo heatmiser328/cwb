@@ -6,6 +6,8 @@ angular.module('cwb.controllers')
 
     $scope.show = {};
     $scope.show.results = true;
+    $scope.show.attacker = true;
+    $scope.show.defender = true;
     $scope.attack = {};
     $scope.defend = {};
     $scope.results = {};
@@ -53,8 +55,14 @@ angular.module('cwb.controllers')
     }
     
     $scope.onDie = function(die) {
-    	var v = ($scope[die] || 1) + 1;
-        $scope[die] = (v > 6) ? 1 : v;
+    	var d = dice.getDieEx(die);
+        d.increment(true);
+        setDice();
+        resolveFire();
+    }
+    
+    $scope.onChange = function() {
+        resolveFire();
     }
     
     $scope.onRoll = function() {

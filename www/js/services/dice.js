@@ -43,6 +43,16 @@ angular.module('cwb.services')
                 return self._value.toString();
             }
             
+		    self.increment = function(rollover) {
+            	if (++self._value > self._high) {
+                	self._value = rollover ? self._low : self._high;
+                }
+            }
+		    self.decrement = function(rollover) {
+            	if (--self._value < self._low) {
+                	self._value = rollover ? self._high : self._low;
+                }
+            }
 		    self.roll = function() {
 		    	self._value = randomBetween(self._low, self._high);
 		        
@@ -69,13 +79,18 @@ angular.module('cwb.services')
 		    	return self._dice.length;
 		    }    
 		    
-		    self.getDie = function(i) {
+		    self.getDieEx = function(i) {
 		    	if (--i >= 0 && i < self._dice.length) {
-		        	return self._dice[i].getValue();
+		        	return self._dice[i];
 		        }
 		        else {
-		        	return 0;
+		        	return {};
 		        }
+		    }
+            
+		    self.getDie = function(i) {
+            	var d = self.getDieEx(i);
+                return d ? d.getValue() : 0;
 		    }
 		    self.setDie = function(i, d) {
 		    	if (--i >= 0 && i < self._dice.length) {

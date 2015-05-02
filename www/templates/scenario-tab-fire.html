@@ -14,17 +14,17 @@
 						</button>
 					</div>
 					<div class="col col-80">
-						<img class="dice-image" src="img/dice/red{{fireDie1}}.png" ng-click="onDie('fireDie1')"></img>
-						<img class="dice-image" src="img/dice/red{{fireDie2}}.png" ng-click="onDie('fireDie2')"></img>
+						<img class="dice-image" src="img/dice/red{{fireDie1}}.png" ng-click="onDie(1)"></img>
+						<img class="dice-image" src="img/dice/red{{fireDie2}}.png" ng-click="onDie(2)"></img>
 						
-						<img class="dice-image" src="img/dice/yellow{{roundDie}}.png" ng-click="onDie('roundDie')"></img>
-						<img class="dice-image" src="img/dice/green{{stragglerDie}}.png" ng-click="onDie('stragglerDie')"></img>
+						<img class="dice-image" src="img/dice/yellow{{roundDie}}.png" ng-click="onDie(3)"></img>
+						<img class="dice-image" src="img/dice/green{{stragglerDie}}.png" ng-click="onDie(4)"></img>
 						
-						<img class="dice-image" src="img/dice/blackr{{moraleDie1}}.png" ng-click="onDie('moraleDie1')"></img>
-						<img class="dice-image" src="img/dice/blackw{{moraleDie2}}.png" ng-click="onDie('moraleDie2')"></img>
+						<img class="dice-image" src="img/dice/blackr{{moraleDie1}}.png" ng-click="onDie(5)"></img>
+						<img class="dice-image" src="img/dice/blackw{{moraleDie2}}.png" ng-click="onDie(6)"></img>
 						
-						<img class="dice-image" src="img/dice/blue{{ldrlossDie1}}.png" ng-click="onDie('ldrlossDie1')"></img>
-						<img class="dice-image" src="img/dice/white{{ldrlossDie2}}.png" ng-click="onDie('ldrlossDie2')"></img>
+						<img class="dice-image" src="img/dice/blue{{ldrlossDie1}}.png" ng-click="onDie(7)"></img>
+						<img class="dice-image" src="img/dice/white{{ldrlossDie2}}.png" ng-click="onDie(8)"></img>
 					</div>
 				</div>
 				<div class="item" ng-show="isItemShown('results')">
@@ -75,15 +75,15 @@
 				<div class="item" ng-show="isItemShown('attacker')">
 					<label class="item item-input item-select">
 						<span class="input-label">Points</span>
-					    <select ng-model="attack.points" ng-options="f.code for f in firepts" required></select>
+					    <select ng-model="attack.points" ng-options="f.code for f in firepts" ng-change="onChange()" required></select>
 		            </label>
 					<div class="card">
-						<ion-checkbox ng-model="attack.upslope">Up Slope</ion-checkbox>
-						<ion-checkbox ng-model="attack.lowammo">Low Ammo</ion-checkbox>
-						<ion-checkbox ng-model="attack.dg">DG</ion-checkbox>
-						<ion-checkbox ng-model="attack.ccflank">CC Flank</ion-checkbox>
-						<ion-checkbox ng-model="attack.swamp">Swamp</ion-checkbox>
-						<ion-checkbox ng-model="attack.night">Night</ion-checkbox>
+						<ion-checkbox ng-model="attack.upslope" ng-change="onChange()">Up Slope</ion-checkbox>
+						<ion-checkbox ng-model="attack.lowammo" ng-change="onChange()">Low Ammo</ion-checkbox>
+						<ion-checkbox ng-model="attack.dg" ng-change="onChange()">DG</ion-checkbox>
+						<ion-checkbox ng-model="attack.ccflank" ng-change="onChange()">CC Flank</ion-checkbox>
+						<ion-checkbox ng-model="attack.swamp" ng-change="onChange()">Swamp</ion-checkbox>
+						<ion-checkbox ng-model="attack.night" ng-change="onChange()">Night</ion-checkbox>
 					</div>
 				</div>
 				
@@ -99,27 +99,27 @@
 				<div class="item" ng-show="isItemShown('defender')">
 					<label class="item item-input item-select">
 						<span class="input-label">Level</span>
-					    <select ng-model="defend.level" ng-options="m as m for m in moralelevels" required></select>
+					    <select ng-model="defend.level" ng-options="m as m for m in moralelevels" ng-change="onChange()" required></select>
 		            </label>
 					<label class="item item-input item-select">
 						<span class="input-label">State</span>
-					    <select ng-model="defend.state" ng-options="m.desc for m in moralestates" required></select>
+					    <select ng-model="defend.state" ng-options="m.desc for m in moralestates" ng-change="onChange()" required></select>
 		            </label>
 					<label class="item item-input">
 						<span class="input-label">Leader</span>
-						<input type="number" class="text-center" ng-model="defend.leader" min="-1" max="5"></input>
+						<input type="number" class="text-center" ng-model="defend.leader" ng-change="onChange()" min="-1" max="5"></input>
 				    </label>
 					<div class="card">
-						<ion-checkbox ng-model="defend.lowammo">Low Ammo</ion-checkbox>
-						<ion-checkbox ng-model="defend.column">Col/Limb/Flank</ion-checkbox>
-						<ion-checkbox ng-model="defend.arty">w/Unlimb Arty</ion-checkbox>
-						<ion-checkbox ng-model="defend.wrkbgd">Wrecked Bde</ion-checkbox>
-						<ion-checkbox ng-model="defend.wrkdiv">Wrecked Div</ion-checkbox>
-						<ion-checkbox ng-model="defend.trench">Low Ammo</ion-checkbox>
-						<ion-checkbox ng-model="defend.mounted">Mounted</ion-checkbox>
-						<ion-checkbox ng-model="defend.ccattacker">CC Attacker</ion-checkbox>
-						<ion-checkbox ng-model="defend.ccattackersp">CC Attacker Special</ion-checkbox>
-						<ion-checkbox ng-model="defend.ccdefender">CC Defender</ion-checkbox>
+						<ion-checkbox ng-model="defend.lowammo" ng-change="onChange()">Low Ammo</ion-checkbox>
+						<ion-checkbox ng-model="defend.column" ng-change="onChange()">Col/Limb/Flank</ion-checkbox>
+						<ion-checkbox ng-model="defend.arty" ng-change="onChange()">w/Unlimb Arty</ion-checkbox>
+						<ion-checkbox ng-model="defend.wrkbgd" ng-change="onChange()">Wrecked Bde</ion-checkbox>
+						<ion-checkbox ng-model="defend.wrkdiv" ng-change="onChange()">Wrecked Div</ion-checkbox>
+						<ion-checkbox ng-model="defend.trench" ng-change="onChange()">Low Ammo</ion-checkbox>
+						<ion-checkbox ng-model="defend.mounted" ng-change="onChange()">Mounted</ion-checkbox>
+						<ion-checkbox ng-model="defend.ccattacker" ng-change="onChange()">CC Attacker</ion-checkbox>
+						<ion-checkbox ng-model="defend.ccattackersp" ng-change="onChange()">CC Attacker Special</ion-checkbox>
+						<ion-checkbox ng-model="defend.ccdefender" ng-change="onChange()">CC Defender</ion-checkbox>
 					</div>
 				</div>
 				

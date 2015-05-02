@@ -85,6 +85,16 @@ angular.module('cwb', ['ionic', 'cwb.controllers', 'cwb.services', 'cwb.directiv
             }
         })
 
+        .state('app.scenario.melee', {
+            url: '/melee',
+            views: {
+                'scenario-melee': {
+                    templateUrl: 'templates/scenario-tab-melee.html',
+                    controller: 'ScenarioMeleeCtrl'
+                }
+            }
+        })
+
         ;
             
         // if none of the above states are matched, use this as the fallback
