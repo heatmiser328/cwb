@@ -1,0 +1,65 @@
+<ion-view view-title="{{scenario.battle.title}} - {{scenario.title}}" class="bubble-background">
+	<ion-nav-buttons side="right">
+      <button class="button button-large icon ion-android-refresh" ng-click="reset()">
+      </button>
+	</ion-nav-buttons>
+	<ion-content padding="true">
+		<ion-list>
+			<ion-item class="card">
+				<div class="item item-divider row"> 
+					<div class="col">
+						<button class="button button-small button-assertive" ng-click="onRoll()">
+							<img class="button-roll" src="img/dice/droll.png"></img>
+						</button>
+					</div>
+					<div class="col col-80">
+						<img class="dice-image" src="img/dice/red{{morale.moraleDie1}}.png" ng-click="onDie(1)"></img>
+						<img class="dice-image" src="img/dice/red{{morale.moraleDie2}}.png" ng-click="onDie(2)"></img>
+					</div>
+				</div>
+				<label class="item item-input row">
+					<span class="item-label col col-25">Results</span>
+					<input class="col" type="text" ng-model="morale.results" readonly />
+	            </label>
+			</ion-item>
+		
+			<ion-item class="card">
+				<div class="item">
+					<label class="item item-input item-select">
+						<span class="input-label">Level</span>
+					    <select ng-model="morale.level" ng-options="m as m for m in moralelevels" ng-change="onChange()" required></select>
+		            </label>
+					<label class="item item-input item-select">
+						<span class="input-label">State</span>
+					    <select ng-model="morale.state" ng-options="m.desc for m in moralestates" ng-change="onChange()" required></select>
+		            </label>
+					<div class="row item item-input">
+						<span class="col col-25 input-label">Leader</span>
+						<input type="number" class="col col-25 text-center" ng-model="morale.leader" ng-change="onChange()" min="-1" max="5"></input>
+						<ion-checkbox class="col text-right" ng-model="morale.ldrloss" ng-change="onChange()">Loss</ion-checkbox>
+					</div>
+					<label class="item item-input">
+						<span class="input-label">Misc Mod</span>
+						<input type="number" class="text-left" ng-model="morale.mod" ng-change="onChange()" min="-10" max="10"></input>
+				    </label>
+					
+					<div class="card">
+						<ion-checkbox ng-model="morale.lowammo" ng-change="onChange()">Low Ammo</ion-checkbox>
+						<ion-checkbox ng-model="morale.column" ng-change="onChange()">Col/Limb/Flank</ion-checkbox>
+						<ion-checkbox ng-model="morale.wrkbde" ng-change="onChange()">Wrecked Bde</ion-checkbox>
+						<ion-checkbox ng-model="morale.wrkdiv" ng-change="onChange()">Wrecked Div</ion-checkbox>
+						<ion-checkbox ng-model="morale.arty" ng-change="onChange()">w/Unlimb Arty</ion-checkbox>
+						<ion-checkbox ng-model="morale.trench" ng-change="onChange()">Low Ammo</ion-checkbox>
+						<ion-checkbox ng-model="morale.mounted" ng-change="onChange()">Mounted</ion-checkbox>
+						<ion-checkbox ng-model="morale.ccattacker" ng-change="onChange()">CC Attacker</ion-checkbox>
+						<ion-checkbox ng-model="morale.ccattackersp" ng-change="onChange()">CC Attacker Special</ion-checkbox>
+						<ion-checkbox ng-model="morale.ccdefender" ng-change="onChange()">CC Defender</ion-checkbox>
+						<ion-checkbox ng-model="morale.night" ng-change="onChange()">Night</ion-checkbox>
+					</div>
+				</div>
+			</ion-item>
+			
+		</ion-list>
+	</ion-content>
+	
+</ion-view>

@@ -95,6 +95,16 @@ angular.module('cwb', ['ionic', 'cwb.controllers', 'cwb.services', 'cwb.directiv
             }
         })
 
+        .state('app.scenario.morale', {
+            url: '/morale',
+            views: {
+                'scenario-morale': {
+                    templateUrl: 'templates/scenario-tab-morale.html',
+                    controller: 'ScenarioMoraleCtrl'
+                }
+            }
+        })
+
         ;
             
         // if none of the above states are matched, use this as the fallback

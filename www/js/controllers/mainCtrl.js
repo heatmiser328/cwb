@@ -30,7 +30,7 @@ angular.module('cwb.controllers')
         	//$state.go('app.scenario.turn');
             $log.debug('initial load');
             $location.path('/app/scenario/' + current.scenario + '/turn');
-            //$location.path('/app/scenario/' + current.scenario + '/melee');
+            //$location.path('/app/scenario/' + current.scenario + '/morale');
         }
     })
     .catch(function(err) {
