@@ -2,21 +2,18 @@ angular.module('cwb.controllers')
 
 .controller('ScenarioOrdersCtrl', function($rootScope, $scope, $log, $ionicModal, $ionicPopup, Orders, Roster, Dice) {
 	$log.info('load scenario orders controller');
-    
-    $scope.toggleArmy = function(army) {
-    	if ($scope.isArmyShown(army)) {
-        	$scope.shownArmy = null;
-		} else {
-			$scope.shownArmy = army;
-		}
-	}
-    $scope.isArmyShown = function(army) {
-    	return $scope.shownArmy === army;
-	}
-    
+
+    $scope.show = {};
+    $scope.toggleItem = function(item) {
+        $scope.show[item] = !$scope.show[item];
+    }
+    $scope.isItemShown = function(item) {
+        return !!$scope.show[item];
+    }
+
     $scope.add = function(army) {
     	var neworder = {
-			"id" : 1,
+			"id" : $scope.orders.length,
 			"country" : army.country,
 			"army" : army.army,
 			"sender" : '',

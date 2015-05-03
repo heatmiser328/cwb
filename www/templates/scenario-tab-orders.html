@@ -5,9 +5,9 @@
 	</ion-nav-buttons>
 	<ion-content padding="true">
 		<ion-list>
-			<ion-item ng-repeat="army in current.orders" ng-class="{active: isArmyShown(army)}">
+			<ion-item ng-repeat="army in current.orders" ng-class="{active: isItemShown(army.country+army.army)}">
 				<div class="row">
-					<div class="col-25" ng-click="toggleArmy(army)">
+					<div class="col-25" ng-click="toggleItem(army.country+army.army)">
 						<i class="icon" ng-class="isArmyShown(army) ? 'ion-arrow-down-b' : 'ion-arrow-right-b'"></i>
 						<img class="army-image" src="img/{{army.country}}.png" />
 						{{army.army}}
@@ -17,8 +17,8 @@
 					<button class="col-10 button button-energized button-small icon ion-ios-lightbulb-outline" ng-click="initiative(army)"></button>
 				</div>					
 				<ion-list>
-					<ion-item ng-repeat="order in army.orders" ng-show="isArmyShown(army)">
-						<div class="row">
+					<ion-item ng-repeat="order in army.orders" ng-show="isItemShown(army.country+army.army)">
+						<div class="row"><!-- ng-click="toggleItem(order.id)"-->
 							<img class="col-5 order-image" src="img/{{order.status}}.png" />
 							<input class="col-20" type="text" readonly="readonly" value="{{order.receiver}}" />
 							<input class="col-35" type="text" readonly="readonly" value="{{order.dateTime | date:'MMM d, y h:mm a'}}" />
@@ -30,6 +30,9 @@
 							<button class="col-10 button button-balanced button-small icon ion-checkmark-circled" ng-show="order.status=='InTransit'" ng-click="accept(order)"></button>
 							<button class="col-10 button button-royal button-small icon ion-arrow-graph-down-right" ng-show="order.status=='Delay1' || order.status=='Delay2'" ng-click="reduce(order)"></button>
 							<button class="col-10 button button-calm button-small icon ion-close-circled" ng-show="order.status=='Accepted'" ng-click="stop(order)"></button>
+						</div>
+						<div class="card"><!-- ng-show="isItemShown(order.id)"-->
+							<p>{{order.text}}</p>
 						</div>
 					</ion-item>	
 				</ion-list>
