@@ -1,0 +1,2 @@
+angular.module('cwb.directives', []);
+

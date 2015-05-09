@@ -1,7 +1,3 @@
-angular.module('cwb.controllers', []);
-angular.module('cwb.services', []);
-angular.module('cwb.directives', []);
-
 angular.module('cwb', ['ionic', 'cwb.controllers', 'cwb.services', 'cwb.directives'])
 
     .run(function ($ionicPlatform) {

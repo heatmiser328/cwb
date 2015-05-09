@@ -5,7 +5,7 @@
     <meta name="viewport" content="initial-scale=1, maximum-scale=1, user-scalable=no, width=device-width">
     <title>CWB Assistant</title>
 
-    <link href="lib/bootstrap/css/bootstrap.min.css" rel="stylesheet">
+    <link href="lib/bootstrap/dist/css/bootstrap.min.css" rel="stylesheet">
     <link href="lib/ionic/css/ionic.min.css" rel="stylesheet">
     <link href="lib/font-awesome/css/font-awesome.min.css" rel="stylesheet">
     <link href="css/style.css" rel="stylesheet">
@@ -16,18 +16,17 @@
     -->
 
     <!-- ionic/angularjs js -->
-    <script src="lib/ionic/js/ionic.bundle.js"></script>
+    <script src="lib/ionic/js/ionic.bundle.min.js"></script>
 
     <!-- cordova script (this will be a 404 during development) -->
     <script src="cordova.js"></script>
 
-
-    <script src="lib/ui-bootstrap/ui-bootstrap-tpls-0.12.1.min.js"></script>
-    <script src="lib/moment/moment.js"></script>
+    <script src="lib/moment/min/moment.min.js"></script>
     <script src="lib/lodash/lodash.min.js"></script>
 
     <!-- your app's js -->
     <script src="js/app.js"></script>
+    <script src="js/controllers/controllers.module.js"></script>
     <script src="js/controllers/mainCtrl.js"></script>
     <script src="js/controllers/scenarioCtrl.js"></script>
     <script src="js/controllers/scenarioTurnCtrl.js"></script>
@@ -36,7 +35,9 @@
     <script src="js/controllers/scenarioFireCtrl.js"></script>
     <script src="js/controllers/scenarioMeleeCtrl.js"></script>
     <script src="js/controllers/scenarioMoraleCtrl.js"></script>
+    <script src="js/directives/directives.module.js"></script>
     <script src="js/directives/roster.js"></script>
+    <script src="js/services/services.module.js"></script>
     <script src="js/services/media.js"></script>
     <script src="js/services/sound.js"></script>
     <script src="js/services/dice.js"></script>

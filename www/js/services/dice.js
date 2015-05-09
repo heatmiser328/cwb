@@ -1,123 +1,89 @@
 angular.module('cwb.services')
 
-.factory('Dice', function(Sound) {
+.factory('Dice', function($window, Sound) {
 
 	function randomBetween(low, high) {
-    	return Math.floor(Math.random()*(high-low+1)) + low;
+    	return $window.Math.floor(Math.random()*(high-low+1)) + low;
     }
 	
-	var dice = {
-		Die: function(low, high) {
-			var self = this;
-		    
-		    self._low = low;
-		    self._high = high;
-		    self._value = low;
-		    
-		    self.getValue = function() {
-		        return self._value;
-		    }
-		    self.setValue = function(d) {
-		    	self._value = d;
-		    }
-		    
-            self.name = function() {
-            	if (self._value == 1) {
-                	return "one";
-				}                    
-            	else if (self._value == 2) {
-                	return "two";
-				}                    
-            	else if (self._value == 3) {
-                	return "three";
-				}                    
-            	else if (self._value == 4) {
-                	return "four";
-				}                    
-            	else if (self._value ==  5) {
-                	return "five";
-				}                    
-            	else if (self._value == 6) {
-                	return "six";
-				}                    
-                return self._value.toString();
-            }
-            
-		    self.increment = function(rollover) {
-            	if (++self._value > self._high) {
-                	self._value = rollover ? self._low : self._high;
+    function Die(low, high) {
+		var self = this;
+        var value = low;
+	    
+	    self.value = function(d) {
+        	if (typeof d != 'undefined') {
+            	value = d;
+                if (value < low) {
+                	value = low;
+                } else if (value > high) {
+                	value = high;
                 }
             }
-		    self.decrement = function(rollover) {
-            	if (--self._value < self._low) {
-                	self._value = rollover ? self._high : self._low;
-                }
+            return value;
+        }
+        
+	    self.increment = function(rollover) {
+        	if (++value > high) {
+            	value = rollover ? low : high;
             }
-		    self.roll = function() {
-		    	self._value = randomBetween(self._low, self._high);
-		        
-		        return self._value;
-		    }
-		},
-
-		Dice: function(numdice, low, high) {
-			var self = this;
-		    
-		    self._dice = [];
-		    
-            for (var i=0; i<numdice; i++) {
-            	self._dice.push(new dice.Die(low, high));
-			}
-            
-            self.each = function(callback) {
-            	_.each(self._dice, function(die, index) {
-                	callback(die, index);
-                });
+        }
+	    self.decrement = function(rollover) {
+        	if (--value < low) {
+            	value = rollover ? high : low;
             }
-		    
-			self.getCount = function() {
-		    	return self._dice.length;
-		    }    
-		    
-		    self.getDieEx = function(i) {
-		    	if (--i >= 0 && i < self._dice.length) {
-		        	return self._dice[i];
-		        }
-		        else {
-		        	return {};
-		        }
-		    }
-            
-		    self.getDie = function(i) {
-            	var d = self.getDieEx(i);
-                return d ? d.getValue() : 0;
-		    }
-		    self.setDie = function(i, d) {
-		    	if (--i >= 0 && i < self._dice.length) {
-		        	self._dice[i].setValue(d);
-		        }
-		    }
+        }
+	    self.roll = function() {
+	    	value = randomBetween(low, high);
+	        return value;
+	    }
+	}
 
-		    self.rollDie = function(i) {
-		    	if (--i >= 0 && i < self._dice.length) {
-		        	self._dice[i].roll();
-		        	return self._dice[i].getValue();
-		        }
-		        else {
-		        	return 0;
-		        }
-		    }
-		    
-		    self.roll = function() {
-		        Sound.play();
-		    
-		    	for (var i=0; i<self._dice.length; i++) {
-		        	self._dice[i].roll();
-		        }
-		    }
+    function Dice(numdice, low, high) {
+		var self = this;
+	    var dice = [];
+        for (var i=0; i<numdice; i++) {
+        	dice.push(new Die(low, high));
 		}
-    };
+        
+		self.count = function() {
+	    	return dice.length;
+	    }    
+	    
+	    self.dieEx = function(i) {
+	    	if (--i >= 0 && i < dice.length) {
+	        	return dice[i];
+	        }
+            return {};
+	    }
+        
+	    self.die = function(i, d) {
+        	var o = self.dieEx(i);
+        	if (typeof d != 'undefined' && o.hasOwnProperty('value')) {
+            	o.value(d);
+            }
+            return o.hasOwnProperty('value') ? o.value() : 0;
+	    }
+        
+	    self.roll = function(i) {
+        	if (typeof i != 'undefined') {
+            	var d = self.dieEx(i);
+                if (d && d.hasOwnProperty('roll')) {
+                	d.roll();
+                    return d.value();
+                }
+                return 0;
+            }
+        	
+	        Sound.play();
+	    	for (var i=0; i<dice.length; i++) {
+	        	dice[i].roll();
+	        }
+	    }
+	}
     
-    return dice;
+	return {
+		Die: Die,
+		Dice: Dice
+    };
     
 });
