@@ -9,8 +9,8 @@ module.exports = function (config) {
             'www/lib/lodash/lodash.js',
             'test/mocks/angular-mocks.js',
             'www/js/services/services.module.js',
-            'www/js/services/dice.js',
-            'test/unit/services/dice-spec.js'
+            'www/js/services/sound.js',
+            'test/unit/services/sound-spec.js'
         ],
         usePolling: true,
         autoWatch: true,
