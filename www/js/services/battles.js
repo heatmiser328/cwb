@@ -1,11 +1,12 @@
 angular.module('cwb.services')
 
-.factory('Battles', function ($http, $q) {
+.factory('Battles', function ($window, $http, $q) {
 	var battles = [];
     var url = '';
-    if(ionic.Platform.isAndroid()){
+    if($window.ionic.Platform.isAndroid()){
     	url = 'file:///android_asset/www';
 	}
+    url = url + '/data/battles.json';
     
     function load() {
     	var deferred = $q.defer();
@@ -13,7 +14,7 @@ angular.module('cwb.services')
         	deferred.resolve(battles);
         }
         else {
-	    	$http.get(url + '/data/battles.json')
+            $http.get(url)
 	    	.success(function(data, status, headers, config) {
             	battles = data;
 	        	deferred.resolve(battles);
